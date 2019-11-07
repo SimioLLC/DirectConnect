@@ -1,0 +1,21 @@
+E:\GlenWirth\Documents\SimioUserExtensions\DirectConnect.dll
+E:\GlenWirth\Documents\SimioUserExtensions\DirectConnect.pdb
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.DirectConnectSettingsDialog.resources
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.Properties.Resources.resources
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.StatusWindow.resources
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.csproj.GenerateResource.cache
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.csproj.CoreCompileInputs.cache
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.dll
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.pdb
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\DirectConnectCode\obj\Debug\DirectConnect.csprojAssemblyReference.cache
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.DirectConnectSettingsDialog.resources
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.Properties.Resources.resources
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.StatusWindow.resources
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.csproj.GenerateResource.cache
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CoreCompileInputs.cache
+C:\Users\dan_h\Documents\SimioUserExtensions\DirectConnect.dll
+C:\Users\dan_h\Documents\SimioUserExtensions\DirectConnect.pdb
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.dll
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.pdb
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.LogWindow.resources
+E:\(svn azure)\SimioCloud\API\DirectConnect-30Sep2019\DirectConnect\Source\obj\Debug\DirectConnect.SaveToDatabaseWindow.resources
