@@ -157,6 +157,11 @@ namespace DirectConnect
             }
         }
 
+        /// <summary>
+        /// Add a new log entry. If resulting count now exceeds MaxEntries,
+        /// then remove the oldest Page.
+        /// </summary>
+        /// <param name="entry"></param>
         private void AddLogEntry(LogEntry entry)
         {
             LogBook.Enqueue(entry);
@@ -174,17 +179,18 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Remove the last (oldest) page from the logbook
+        /// Remove the last (oldest) page from the logbook.
+        /// If the total count is less than PageSize, the simply return.
         /// </summary>
         public void RemoveLastPage()
         {
-            if ( !LogBook.Any())
+            if ( LogBook.Count() <= PageSize)
                 return;
 
-            LogEntry firstEntry = LogBook.Last();
+            LogEntry oldestEntry = LogBook.Last();
 
             List<LogEntry> entryList = LogBook
-                .TakeWhile(ee => ee.PageNumber == firstEntry.PageNumber)
+                .TakeWhile(ee => ee.PageNumber == oldestEntry.PageNumber)
                 .OrderBy(ee => ee.TimeStamp)
                 .ToList();
 
