@@ -180,7 +180,7 @@ namespace DirectConnect
 
         /// <summary>
         /// Remove the last (oldest) page from the logbook.
-        /// If the total count is less than PageSize, the simply return.
+        /// If the total count is less than PageSize, then simply return.
         /// </summary>
         public void RemoveLastPage()
         {
