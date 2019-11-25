@@ -3,3 +3,5 @@
 ################################################################################
 
 /Source/.vs/DirectConnect/v15/Server/sqlite3
+/Source/obj/Debug
+/Source/.vs/DirectConnect/v15/.suo

@@ -151,19 +151,19 @@ namespace DirectConnect
             // The context contains various model events you can subscribe to. You will usually
             //  want to unsubscribe from the event in the implementation of Dispose()
             _context.ModelSaved += _context_ModelSaved;
-            _context.ModelTablesImporting += _context_ModelTablesImporting;
-            _context.ModelTablesImported += _context_ModelTablesImported;
+            //    _context.ModelTablesImporting += _context_ModelTablesImporting;
+            //    _context.ModelTablesImported += _context_ModelTablesImported;
         }
 
-        private void _context_ModelTablesImported(IModelTablesImportedArgs args)
-        {
-            Alert("ModelTablesImported Event");
-        }
+        //private void _context_ModelTablesImported(IModelTablesImportedArgs args)
+        //{
+        //    Alert("ModelTablesImported Event");
+        //}
 
-        private void _context_ModelTablesImporting(IModelTablesImportingArgs args)
-        {
-            Alert("ModelTablesImporting Event");
-        }
+        //private void _context_ModelTablesImporting(IModelTablesImportingArgs args)
+        //{
+        //    Alert("ModelTablesImporting Event");
+        //}
 
         private void SaveDataToSql(string message, string caption, out bool saveTables, out bool saveLogs)
         {
@@ -286,8 +286,8 @@ namespace DirectConnect
 
             // Unsubscribing from the events here, as we no longer need to listen to them,
             _context.ModelSaved -= _context_ModelSaved;
-            _context.ModelTablesImporting -= _context_ModelTablesImporting;
-            _context.ModelTablesImported -= _context_ModelTablesImported;
+            //_context.ModelTablesImporting -= _context_ModelTablesImporting;
+            //_context.ModelTablesImported -= _context_ModelTablesImported;
         }
 
     }

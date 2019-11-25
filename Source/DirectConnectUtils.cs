@@ -232,6 +232,7 @@ namespace DirectConnect
                 var os = logExportConfig.Columns.AddListReferenceColumn("Action");
                 os.ListName = "ExportLogActions";
                 os.DefaultString = "TruncateAndRepopulate";
+                logExportConfig.Columns.AddStringColumn("SqlServerTableName", "");
                 var firstRow = logExportConfig.Rows.Create();
                 firstRow.Properties[0].Value = "ResourceUsageLog";
                 var secondRow = logExportConfig.Rows.Create();
@@ -755,12 +756,12 @@ namespace DirectConnect
         /// <param name="dt"></param>
         /// <param name="cmd"></param>
         /// <param name="actionInt"></param>
-        public static void CopySimioLogToSqlTable(string logName, DataTable dt, SqlCommand cmd, int actionInt)
+        public static void CopySimioLogToSqlTable(string logName, string SQLlogName, DataTable dt, SqlCommand cmd, int actionInt)
         {
             string marker = "";
             try
             {
-                string strCheckTable = $"IF OBJECT_ID('{logName}', 'U') IS NOT NULL SELECT 'true' ELSE SELECT 'false'";
+                string strCheckTable = $"IF OBJECT_ID('{SQLlogName}', 'U') IS NOT NULL SELECT 'true' ELSE SELECT 'false'";
                 marker = $"Check for Table. {strCheckTable}";
 
                 // find table
@@ -770,7 +771,7 @@ namespace DirectConnect
 
                 if (actionInt == 0 && tableFound == true)
                 {
-                    string sqlDelete = $"DROP TABLE [{dt.TableName}]";
+                    string sqlDelete = $"DROP TABLE [{SQLlogName}]";
                     marker = $"Drop Table: {sqlDelete}";
                     cmd.CommandText = sqlDelete;
                     cmd.CommandType = CommandType.Text;
@@ -780,7 +781,7 @@ namespace DirectConnect
                 }
                 else if (actionInt == 1 && tableFound == true)
                 {
-                    string sqlTrunc = $"TRUNCATE TABLE [{dt.TableName}]";
+                    string sqlTrunc = $"TRUNCATE TABLE [{SQLlogName}]";
                     marker = $"Truncate Table: {sqlTrunc}";
                     cmd.CommandText = sqlTrunc;
                     cmd.CommandTimeout = _connectionTimeOut;
@@ -791,7 +792,7 @@ namespace DirectConnect
                 if (tableFound == false)
                 {
                     bool firstColumn = true;
-                    string sqlCreate = $"CREATE TABLE [{dt.TableName}] (";
+                    string sqlCreate = $"CREATE TABLE [{SQLlogName}] (";
                     foreach (DataColumn col in dt.Columns)
                     {
                         if (firstColumn == false)
@@ -822,11 +823,11 @@ namespace DirectConnect
                 // if repopulate or new table
                 if (actionInt <= 1 || tableFound == false)
                 {
-                    marker = $"BulkCopy to {dt.TableName}. Timeout={_connectionTimeOut}";
+                    marker = $"BulkCopy to {SQLlogName}. Timeout={_connectionTimeOut}";
                     using (SqlBulkCopy bulkCopy = new SqlBulkCopy(_connection))
                     {
                         bulkCopy.BulkCopyTimeout = _connectionTimeOut;
-                        bulkCopy.DestinationTableName = dt.TableName;
+                        bulkCopy.DestinationTableName = SQLlogName;
                         bulkCopy.WriteToServer(dt);
                     }
                 }
@@ -1094,6 +1095,9 @@ namespace DirectConnect
                     if (logRow.Properties["Enabled"].Value.Trim().ToLowerInvariant() == "true")
                     {
                         string logName = logRow.Properties["LogName"].Value;
+                        string SQLlogName = logRow.Properties["SQLServerTableName"].Value;
+                        if (SQLlogName == "")
+                            SQLlogName = logName;
 
                         try
                         {
@@ -1103,12 +1107,12 @@ namespace DirectConnect
                             if (logRow.Properties["Action"].Value == "DropCreateAndRepopulate") actionInt = 0;
                             else if (logRow.Properties["Action"].Value == "TruncateAndRepopulate") actionInt = 1;
 
-                            CopySimioLogToSqlTable(logName, dt, cmd, actionInt);
+                            CopySimioLogToSqlTable(logName, SQLlogName, dt, cmd, actionInt);
                             count++;
                         }
                         catch (Exception ex)
                         {
-                            throw new ApplicationException($"Log={logName} Err={ex}");
+                            throw new ApplicationException($"Log={SQLlogName} Err={ex}");
                         }
                     } // check if log enabled
                 } // foreach logrow
