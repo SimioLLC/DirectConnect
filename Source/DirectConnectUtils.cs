@@ -22,6 +22,7 @@ namespace DirectConnect
         public Type Type;
     }
 
+
     public static class DirectConnectUtils
     {
         private static SqlConnection _connection;
@@ -30,6 +31,8 @@ namespace DirectConnect
         private static CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private static string _dateTimeFormatString = string.Empty;
 
+        public const double MaxSqlFloat =  1.0+308; // designed to be memorable
+        public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
 
 
@@ -555,8 +558,9 @@ namespace DirectConnect
         /// <summary>
         /// Make adjustments to the fieldvalue so that it can survive BulkCopy:
         /// 1. Null is replaced with DBNull
-        /// 2. Floating points with NaN are replace with DBNull.
+        /// 2. Floating points with NaN are replaced with DBNull.
         /// 3. DateTimes that are Min or Max valued are replaced with DBNull.
+        /// 4. Flaoting points with Infinity are replaced with MAX SQL value
         /// </summary>
         /// <param name="fieldValue"></param>
         /// <returns></returns>
@@ -586,13 +590,30 @@ namespace DirectConnect
                         case TypeCode.Single:
                             if (Single.IsNaN((Single)fieldValue))
                                 fieldValue = DBNull.Value;
+                            else if ( Single.IsPositiveInfinity((Single)fieldValue))
+                            {
+                                fieldValue = MaxSqlFloat;
+                            }
+                            else if ( Single.IsNegativeInfinity((Single)fieldValue))
+                            {
+                                fieldValue = MinSqlFloat;
+                            }
 
                             break;
 
                         case TypeCode.Double:
                             if (Double.IsNaN((double)fieldValue))
                                 fieldValue = DBNull.Value;
+                            else if (Double.IsPositiveInfinity((Double)fieldValue))
+                            {
+                                fieldValue = MaxSqlFloat;
+                            }
+                            else if (Double.IsNegativeInfinity((Double)fieldValue))
+                            {
+                                fieldValue = MinSqlFloat;
+                            }
                             break;
+
                     } // switch
                 }
 

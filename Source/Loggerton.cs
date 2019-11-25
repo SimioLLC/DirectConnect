@@ -9,7 +9,9 @@ using System.Windows.Forms;
 
 namespace DirectConnect
 {
-
+    /// <summary>
+    /// Each log entry has Flags to indicate type.
+    /// </summary>
     [Flags]
     public enum EnumLogFlags
     {
@@ -37,6 +39,9 @@ namespace DirectConnect
         /// </summary>
         public DateTimeOffset TimeStamp { get; set; }
 
+        /// <summary>
+        /// The actual log message.
+        /// </summary>
         public string Message { get; set; }
 
 
@@ -45,6 +50,10 @@ namespace DirectConnect
         /// </summary>
         public int Index { get; set; }
 
+        /// <summary>
+        /// Logs are grouped into pages. 
+        /// This concept is used to remove old entries (See also PageSize)
+        /// </summary>
         public int PageNumber {  get { return Index / Loggerton.PageSize; } }
 
         /// <summary>
@@ -148,6 +157,11 @@ namespace DirectConnect
             }
         }
 
+        /// <summary>
+        /// Add a new log entry. If resulting count now exceeds MaxEntries,
+        /// then remove the oldest Page.
+        /// </summary>
+        /// <param name="entry"></param>
         private void AddLogEntry(LogEntry entry)
         {
             LogBook.Enqueue(entry);
@@ -165,17 +179,18 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Remove the last (oldest) page from the logbook
+        /// Remove the last (oldest) page from the logbook.
+        /// If the total count is less than PageSize, then simply return.
         /// </summary>
         public void RemoveLastPage()
         {
-            if ( !LogBook.Any())
+            if ( LogBook.Count() <= PageSize)
                 return;
 
-            LogEntry firstEntry = LogBook.Last();
+            LogEntry oldestEntry = LogBook.Last();
 
             List<LogEntry> entryList = LogBook
-                .TakeWhile(ee => ee.PageNumber == firstEntry.PageNumber)
+                .TakeWhile(ee => ee.PageNumber == oldestEntry.PageNumber)
                 .OrderBy(ee => ee.TimeStamp)
                 .ToList();
 
