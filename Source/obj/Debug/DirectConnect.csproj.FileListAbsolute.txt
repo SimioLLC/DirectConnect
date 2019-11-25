@@ -29,3 +29,13 @@ E:\(svn azure)\SimioCloud\Github\DirectConnect\Source\obj\Debug\DirectConnect.cs
 E:\(svn azure)\SimioCloud\Github\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CoreCompileInputs.cache
 E:\(svn azure)\SimioCloud\Github\DirectConnect\Source\obj\Debug\DirectConnect.dll
 E:\(svn azure)\SimioCloud\Github\DirectConnect\Source\obj\Debug\DirectConnect.pdb
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.csprojAssemblyReference.cache
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.DirectConnectSettingsDialog.resources
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.LogWindow.resources
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.Properties.Resources.resources
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.StatusWindow.resources
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.SaveToDatabaseWindow.resources
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.csproj.GenerateResource.cache
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CoreCompileInputs.cache
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.dll
+C:\Users\dan_h\Source\Repos\SimioLLC\DirectConnect\Source\obj\Debug\DirectConnect.pdb

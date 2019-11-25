@@ -9,7 +9,9 @@ using System.Windows.Forms;
 
 namespace DirectConnect
 {
-
+    /// <summary>
+    /// Each log entry has Flags to indicate type.
+    /// </summary>
     [Flags]
     public enum EnumLogFlags
     {
@@ -37,6 +39,9 @@ namespace DirectConnect
         /// </summary>
         public DateTimeOffset TimeStamp { get; set; }
 
+        /// <summary>
+        /// The actual log message.
+        /// </summary>
         public string Message { get; set; }
 
 
@@ -45,6 +50,10 @@ namespace DirectConnect
         /// </summary>
         public int Index { get; set; }
 
+        /// <summary>
+        /// Logs are grouped into pages. 
+        /// This concept is used to remove old entries (See also PageSize)
+        /// </summary>
         public int PageNumber {  get { return Index / Loggerton.PageSize; } }
 
         /// <summary>
