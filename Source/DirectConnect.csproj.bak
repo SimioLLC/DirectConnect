@@ -61,6 +61,7 @@
       <DependentUpon>DirectConnectSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DirectConnectUtils.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Loggerton.cs" />
     <Compile Include="LogWindow.cs">
       <SubType>Form</SubType>
