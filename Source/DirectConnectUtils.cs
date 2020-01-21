@@ -559,7 +559,7 @@ namespace DirectConnect
         /// 1. Null is replaced with DBNull
         /// 2. Floating points with NaN are replaced with DBNull.
         /// 3. DateTimes that are Min or Max valued are replaced with DBNull.
-        /// 4. Flaoting points with Infinity are replaced with MAX SQL value
+        /// 4. Floating points with Infinity are replaced with MAX SQL value
         /// </summary>
         /// <param name="fieldValue"></param>
         /// <returns></returns>
