@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SimioAPI;
 using SimioAPI.Extensions;
-
+using System.IO;
 
 namespace DirectConnect
 {
@@ -27,6 +27,7 @@ namespace DirectConnect
 
         public ModelAddInEnvironment AddInEnvironment => ModelAddInEnvironment.InteractiveDesktop | ModelAddInEnvironment.SimioProjectFactoryAPI;
 
+
         /// <summary>
         /// Called at the time the model is loaded.
         /// </summary>
@@ -34,17 +35,26 @@ namespace DirectConnect
         /// <returns></returns>
         public IDisposable CreateInstance(IModelHelperContext context)
         {
-            Logit( $"Creating ModelHelper Instance. Model={context.Model.Name} #Tables={context.Model.Tables.Count}" );
-            Logit( $"Creating ModelHelper Instance. API Name={Name} Description={Description} Guid={UniqueID}");
 
-            // new model setup
+            DirectConnectUtils.DirectConnectLogPath = string.Empty;
+
+            if ( (bool) context.PropertyValues.FirstOrDefault(p => p.Name == "LogToDisk").Value )
+            {
+                DirectConnectUtils.DirectConnectLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimioAPI-DirectConnect.log");
+                File.Delete(DirectConnectUtils.DirectConnectLogPath);
+            }
+
+            Logit( $"Info: Creating ModelHelper Instance. Model={context.Model.Name} #Tables={context.Model.Tables.Count}" );
+            Logit( $"Info: Creating ModelHelper Instance. API Name={Name} Description={Description} Guid={UniqueID}");
+
+            // Setup lists to be used by this plugin
             DirectConnectUtils.NewModelSetup(context.Model);
 
             // get connect string
             var connectionString = context.PropertyValues.FirstOrDefault(p => p.Name == "ConnectionString");
             if (connectionString?.Value != null)
             {
-                Logit($"CreateInstance. ConnectionString={connectionString.Value}");
+                Logit($"Info: CreateInstance. ConnectionString={connectionString.Value}");
                 try
                 {
                     if ( string.IsNullOrEmpty(connectionString.Value.ToString()) )
@@ -62,7 +72,7 @@ namespace DirectConnect
             var connectionTimeOut = context.PropertyValues.FirstOrDefault(p => p.Name == "ConnectionTimeOut");
             if (connectionTimeOut?.Value != null)
             {
-                Logit($"CreateInstance. ConnectionTimeOut={connectionTimeOut.Value}");
+                Logit($"Info: CreateInstance. ConnectionTimeOut={connectionTimeOut.Value}");
                 try
                 {
                     if ( string.IsNullOrEmpty(connectionTimeOut.Value.ToString()) )
@@ -77,7 +87,7 @@ namespace DirectConnect
                     }
                     else
                     {
-                        throw new Exception("Connection TimeOut Is Not An Integer.  Redefine connection timeout and re-enable model helper.");
+                        throw new Exception($"Connection TimeOut ({connectionTimeOut.Value}) Is Not An Integer.  Redefine connection timeout and re-enable model helper.");
                     }
                 }
                 catch (Exception ex)
@@ -95,7 +105,7 @@ namespace DirectConnect
                 {
                     if ( string.IsNullOrEmpty(dateTimeFormatProp.Value.ToString()) )
                     {
-                        throw new Exception("DateTimeFormat string Is Blank.  Define tihe DateTime Format String and re-enable model helper.");
+                        throw new Exception("DateTimeFormat string Is Blank.  Define the DateTime Format String and re-enable model helper.");
                     }
                     DirectConnectUtils.SetDateTimeFormatString(dateTimeFormatProp.Value.ToString());
 
@@ -131,6 +141,11 @@ namespace DirectConnect
             dateTimeFormatProp.DisplayName = "DateTime Format String";
             dateTimeFormatProp.Description = "DateTime Format String Used To Save To Database (e.g. yyyy-MM-dd HH:mm:ss).  String value need to be defined.";
             dateTimeFormatProp.DefaultValue = "yyyy-MM-dd HH:mm:ss";
+
+            var logToDiskProp = schema.Properties.AddBooleanProperty("LogToDisk");
+            logToDiskProp.DisplayName = "Log DirectConnect status to disk";
+            logToDiskProp.Description = "The DirectConnect plugin generates status and error logs. If set to true, these will be logged to Documents > SimioDirectConnect.log";
+            logToDiskProp.DefaultValue = true;
         }
 
         private void Logit(string message)
@@ -140,6 +155,10 @@ namespace DirectConnect
 
     }
 
+    /// <summary>
+    /// This class' instance holds the ModelHelperContext methods
+    /// are called when, for example, Simio saves the model.
+    /// </summary>
     class DirectConnectOnSaveInstance : IDisposable
     {
         readonly IModelHelperContext _context;
@@ -151,8 +170,16 @@ namespace DirectConnect
             // The context contains various model events you can subscribe to. You will usually
             //  want to unsubscribe from the event in the implementation of Dispose()
             _context.ModelSaved += _context_ModelSaved;
+            
         }
 
+        /// <summary>
+        /// Method to prompt the user for saving tables and SimioLogs.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="caption"></param>
+        /// <param name="saveTables"></param>
+        /// <param name="saveLogs"></param>
         private void SaveDataToSql(string message, string caption, out bool saveTables, out bool saveLogs)
         {
             saveTables = true;
@@ -170,17 +197,22 @@ namespace DirectConnect
             }
         }
 
+        /// <summary>
+        /// Optionally prompt for saving tables and SimioLogs to the database.
+        /// and then save them.
+        /// </summary>
+        /// <param name="args"></param>
         private void _context_ModelSaved(IModelSavedArgs args)
         {
             //
             // This is the handler for the "Model Saved" event, this is the bulk of the "helping" logic
             //
             bool isInteractive = _context.AddInEnvironment == ModelAddInEnvironment.InteractiveDesktop;
-
+            string marker = "Begin.";
             try
             {
 
-                // First the tables
+                // Saves tables and then logs
                 Boolean saveTables = true;
                 Boolean saveLogs = true;
 
@@ -196,17 +228,26 @@ namespace DirectConnect
                 {
                     int tablesSaved = 0;
                     DirectConnectUtils.SaveSimioTablesToDB(_context.Model, String.Empty, ref tablesSaved);
-                    sbSaveMessage.AppendLine($"Done. Number Of Tables Exported: {tablesSaved}");
+                    marker = $"Saved Tables. Number Of Tables Exported: {tablesSaved}";
+                    sbSaveMessage.AppendLine(marker);
+                    Logit(marker);
                 } // non-interactive, or user says ok to save
 
                 if ( saveLogs )
                 {
                     int logsSaved = 0;
                     DirectConnectUtils.SaveSimioLogsToDB(_context.Model, ref logsSaved );
-                    sbSaveMessage.AppendLine($"Done. Number Of Logs Exported: {logsSaved}");
+                    marker = $"Saved Logs. Number Of Logs Exported: {logsSaved}";
+                    sbSaveMessage.AppendLine(marker);
+                    Logit(marker);
                 } // non-interactive, or user says ok to save
 
                 ShowStatus(isInteractive, "Exported", sbSaveMessage.ToString() );
+
+                if ( !string.IsNullOrEmpty( DirectConnectUtils.DirectConnectLogPath) )
+                {
+                    Loggerton.Instance.WriteLogs(DirectConnectUtils.DirectConnectLogPath);
+                }
 
             }
             catch (Exception ex)

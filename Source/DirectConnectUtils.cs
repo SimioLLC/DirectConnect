@@ -30,11 +30,15 @@ namespace DirectConnect
         private static string _connectionString = string.Empty;
         private static CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private static string _dateTimeFormatString = string.Empty;
+        private static string _diagnosticLogsPath = string.Empty;
 
         public const double MaxSqlFloat =  1.0+308; // designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
-
+        /// <summary>
+        /// Where to write the DirectConnect logs.
+        /// </summary>
+        public static string DirectConnectLogPath { get; set; }
 
         /// <summary>
         /// Returns a list of tuples that are ClrType and corresponding SqlType(as strings)
@@ -763,7 +767,7 @@ namespace DirectConnect
 
             if (_connection.State == ConnectionState.Closed)
             {
-                throw new Exception("Connection Is Closed.  Fix Connection String, Save and Reopen Model");
+                throw new Exception($"Connection Is Closed.  Fix Connection String ({_connectionString}), Save and Reopen Model");
             }
 
         }

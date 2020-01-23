@@ -241,16 +241,20 @@ namespace DirectConnect
         /// <returns></returns>
         public string ShowLogs()
         {
-            return LogBook.ToString();
+            string logs = GetLogs(EnumLogFlags.All);
+            return logs;
         }
 
         /// <summary>
         /// Push all the logs out to a file.
+        /// The previous log file is deleted.
         /// </summary>
         /// <param name="path"></param>
         public void WriteLogs(string path)
         {
-            File.WriteAllText(path, LogBook.ToString());
+            File.Delete(path);
+            string logs = GetLogs(EnumLogFlags.All);
+            File.WriteAllText(path, logs);
         }
 
         /// <summary>
