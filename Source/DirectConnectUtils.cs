@@ -1073,7 +1073,7 @@ namespace DirectConnect
 
         /// <summary>
         /// Select a valid CLR type that will work with SQL Types
-        /// If it is not int the ClrToSql list, then it will default to NVARCHAR(MAX)
+        /// If it is not in the ClrToSql list, then it is set to System.String, which will default to NVARCHAR(MAX)
         /// </summary>
         /// <param name="clrType"></param>
         /// <returns></returns>
@@ -1083,8 +1083,7 @@ namespace DirectConnect
             string clrTypeName = clrType.ToString();
 
             Tuple<string, string> tuple = ClrToSqlList
-                .SingleOrDefault(rr => rr.Item1.ToLower() == clrTypeName
-                .ToLower());
+                .SingleOrDefault(rr => rr.Item1.ToLower() == clrTypeName.ToLower());
 
             if (tuple != null)
                 validType = tuple.Item1;
@@ -1093,9 +1092,6 @@ namespace DirectConnect
 
             return Type.GetType(validType);
         }
-
-
-
 
         /// <summary>
         /// In this version of the log there are a few enhancements:
@@ -1337,20 +1333,22 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Check Simio Table columns against the SQL database columns.
+        /// A schema check of the Simio Table columns against the SQL database columns.
+        /// We are looking to make sure the the column names in Simio tables and SQL table match (case insensitive)
+        /// (and vice versa). Detailed exceptions are thrown if this is not the case.
         /// </summary>
-        /// <param name="table"></param>
+        /// <param name="simioTable"></param>
         /// <param name="dbColumnNames"></param>
-        internal static void CheckSimioTableColumnsAgainstDatabaseColumns(ITable table, List<GridDataColumnInfo> dbColumnNames)
+        internal static void CheckSimioTableColumnsAgainstDatabaseColumns(ITable simioTable, List<GridDataColumnInfo> dbColumnNames)
         {
             foreach (var dbColumnName in dbColumnNames)
             {
                 if (dbColumnName.Name == "Id")
                 {
-                    break;
+                    break; // ?? should this be continue ??
                 }
                 Boolean foundFlag = false;
-                foreach (var col in table.Columns)
+                foreach (var col in simioTable.Columns)
                 {
                     if (dbColumnName.Name == col.Name)
                     {
@@ -1360,7 +1358,7 @@ namespace DirectConnect
                 }
                 if (foundFlag == false) // if not in columns, check the states
                 {
-                    foreach (var stateCol in table.StateColumns)
+                    foreach (var stateCol in simioTable.StateColumns)
                     {
                         if (dbColumnName.Name == stateCol.Name)
                         {
@@ -1378,7 +1376,7 @@ namespace DirectConnect
                 }
             }
 
-            foreach (var col in table.Columns)
+            foreach (var col in simioTable.Columns)
             {
                 Boolean foundFlag = false;
                 foreach (var dbColumnName in dbColumnNames)
@@ -1398,7 +1396,7 @@ namespace DirectConnect
                 }
             }
 
-            foreach (var stateCol in table.StateColumns)
+            foreach (var stateCol in simioTable.StateColumns)
             {
                 Boolean foundFlag = false;
                 foreach (var dbColumnName in dbColumnNames)
