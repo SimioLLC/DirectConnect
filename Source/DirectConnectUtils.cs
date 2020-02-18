@@ -162,7 +162,8 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Called during the model load to set up tables that can specify export actions.
+        /// Called during the model load to set up an 'action' tables that are
+        /// used to specify export actions for (1) tables, (2) logs
         /// </summary>
         /// <param name="model"></param>
         public static void NewModelSetup(IModel model)
@@ -1686,18 +1687,25 @@ namespace DirectConnect
 
         }
 
+        /// <summary>
+        /// Return the SQL type for the State type.
+        /// Only simple types (real, int, datetime, bit) are converted,
+        /// and anything else is set the nvarchar(1000)
+        /// </summary>
+        /// <param name="stateCol"></param>
+        /// <returns></returns>
         private static string GetSimioTableStateColumnType(ITableStateColumn stateCol)
         {
 
             switch (stateCol)
             {
-                case IRealTableColumn cc:
+                case IRealTableStateColumn cc:
                     return "real";
-                case IIntegerTableColumn cc:
+                case IIntegerTableStateColumn cc:
                     return "int";
-                case IDateTimeTableColumn cc:
+                case IDateTimeTableStateColumn cc:
                     return "datetime";
-                case IBooleanTableColumn cc:
+                case IBooleanTableStateColumn cc:
                     return "bit";
                 default:
                     return "nvarchar(1000)";
