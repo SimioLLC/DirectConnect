@@ -1693,13 +1693,13 @@ namespace DirectConnect
 
             switch (stateCol)
             {
-                case IRealTableColumn cc:
+                case IRealTableStateColumn cc:
                     return "real";
-                case IIntegerTableColumn cc:
+                case IIntegerTableStateColumn cc:
                     return "int";
-                case IDateTimeTableColumn cc:
+                case IDateTimeTableStateColumn cc:
                     return "datetime";
-                case IBooleanTableColumn cc:
+                case IBooleanTableStateColumn cc:
                     return "bit";
                 default:
                     return "nvarchar(1000)";
