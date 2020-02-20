@@ -1636,14 +1636,26 @@ namespace DirectConnect
                         {
                             switch ( valueString.ToLower())
                             {
-                                case "nan": 
-                                case "infinity":
                                 case "âˆž":
+                                case "infinity":
+                                    {
+                                        valueString = MaxSqlFloat.ToString();
+                                    }
+                                    break;
+
                                 case "-âˆž":
+                                case "-infinity":
+                                    {
+                                        valueString = (MinSqlFloat).ToString();
+                                    }
+                                    break;
+
+                                case "nan":
                                     {
                                         valueString = null;
-                        }
+                                    }
                                     break;
+
                                 default:
                                     {
                                         if (Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleProp))
