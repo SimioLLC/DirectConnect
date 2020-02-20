@@ -32,8 +32,11 @@ namespace DirectConnect
         private static string _dateTimeFormatString = string.Empty;
         private static string _diagnosticLogsPath = string.Empty;
 
-        public const double MaxSqlFloat =  1.0+308; // designed to be memorable
+        public const double MaxSqlFloat = 1.0E+308; // designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
+
+        public const double MaxSqlReal = 1.0E+38; // designed to be memorable
+        public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
 
         /// <summary>
         /// Where to write the DirectConnect logs.
@@ -1636,17 +1639,17 @@ namespace DirectConnect
                         {
                             switch ( valueString.ToLower())
                             {
-                                case "âˆž":
+                                case "\u221E":  // Unicode infinity character
                                 case "infinity":
                                     {
-                                        valueString = MaxSqlFloat.ToString();
+                                        valueString = MaxSqlReal.ToString();
                                     }
                                     break;
 
-                                case "-âˆž":
-                                case "-infinity":
+                                case "-\u221E": // Unicode infinity character
+                                case "-infinity": 
                                     {
-                                        valueString = (MinSqlFloat).ToString();
+                                        valueString = (MinSqlReal).ToString();
                                     }
                                     break;
 
