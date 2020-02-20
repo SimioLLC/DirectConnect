@@ -31,9 +31,11 @@ namespace DirectConnect
         private static CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private static string _dateTimeFormatString = string.Empty;
 
-        public const double MaxSqlFloat =  1.0+308; // designed to be memorable
+        public const double MaxSqlFloat =  1.0E+308; // designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
+        public const double MaxSqlReal = 1.0E+38; // designed to be memorable
+        public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
 
 
         /// <summary>
@@ -593,11 +595,11 @@ namespace DirectConnect
                                 fieldValue = DBNull.Value;
                             else if ( Single.IsPositiveInfinity((Single)fieldValue))
                             {
-                                fieldValue = MaxSqlFloat;
+                                fieldValue = MaxSqlReal;
                             }
                             else if ( Single.IsNegativeInfinity((Single)fieldValue))
                             {
-                                fieldValue = MinSqlFloat;
+                                fieldValue = MinSqlReal;
                             }
 
                             break;
@@ -1636,17 +1638,17 @@ namespace DirectConnect
                         {
                             switch ( valueString.ToLower())
                             {
-                                case "âˆž":
+                                case "∞":
                                 case "infinity":
                                     {
-                                        valueString = MaxSqlFloat.ToString();
+                                        valueString = MaxSqlReal.ToString();
                                     }
                                     break;
 
-                                case "-âˆž":
+                                case "-∞":
                                 case "-infinity":
                                     {
-                                        valueString = (MinSqlFloat).ToString();
+                                        valueString = (MinSqlReal).ToString();
                                     }
                                     break;
 
@@ -1660,8 +1662,8 @@ namespace DirectConnect
                                     {
                                         if (Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleProp))
                                         {
-                        valueString = doubleProp.ToString(_cultureInfo);
-                    }
+                                            valueString = doubleProp.ToString(_cultureInfo);
+                                        }
                                         else
                                             valueString = null;
                                     }

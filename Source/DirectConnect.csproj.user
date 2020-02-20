@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartWorkingDirectory>C:\Users\Public\Documents\Simio\Examples\</StartWorkingDirectory>
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files %28x86%29\Simio\Simio64.exe</StartProgram>
+    <StartProgram>C:\Program Files %28x86%29\Simio202\Simio64.exe</StartProgram>
     <StartArguments>-f C:\Users\Public\Documents\Simio\Examples\SchedulingDiscretePartProduction_DC.spfx</StartArguments>
   </PropertyGroup>
 </Project>
