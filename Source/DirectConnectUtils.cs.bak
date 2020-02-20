@@ -1419,10 +1419,8 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Convert a Simio Table to a System.Data.DataTable.
-        /// The table can contain either Property or State values
-        /// Reals that cannot be parsed or are NaN, infinity, or -infinity are converted to null.
-        /// DateTimes that cannot be parsed are converted to null.
+        /// Convert a Simio Table to a DataTable.
+        /// The table can contain either property or State values
         /// The returned result is a Microsoft DataTabe.
         /// </summary>
         /// <param name="table"></param>
@@ -1498,8 +1496,6 @@ namespace DirectConnect
                 }
                 tableList.Add(thisRow.ToArray());
             }
-
-        DoneWithRows:;
 
             // New table.
             var dataTable = new DataTable();
@@ -1612,7 +1608,10 @@ namespace DirectConnect
         /// <returns></returns>
         private static string GetFormattedStringValue(String valueString, String dataType)
         {
-
+            DateTime dateProp = Convert.ToDateTime("2008-01-01 00:00:00");
+            Double doubleProp = 0.0;
+            Int64 intProp = 0;
+            Boolean boolProp = false;
 
             switch (dataType)
             {
@@ -1620,13 +1619,9 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            if (Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out long intProp))
-                            {
-                                valueString = intProp.ToString(_cultureInfo);
-                            }
-                            else
-                                valueString = null;
+                            Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out intProp);
                         }
+                        valueString = intProp.ToString(_cultureInfo);
                     }
                     break;
 
@@ -1634,28 +1629,9 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            switch ( valueString.ToLower())
-                            {
-                                case "nan": 
-                                case "infinity":
-                                case "âˆž":
-                                case "-âˆž":
-                                    {
-                                        valueString = null;
+                            Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out doubleProp);
                         }
-                                    break;
-                                default:
-                                    {
-                                        if (Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleProp))
-                                        {
                         valueString = doubleProp.ToString(_cultureInfo);
-                    }
-                                        else
-                                            valueString = null;
-                                    }
-                                    break;
-                            }
-                        }
                     }
                     break;
 
@@ -1663,33 +1639,18 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            if (DateTime.TryParse(valueString, out DateTime dateProp))
-                            {
-                                valueString = dateProp.ToString(_cultureInfo);
-                                if (dateProp.Year < 1753 || dateProp.Year > 9999) // SQL range
-                                {
-                                    valueString = null;
+                            DateTime.TryParse(valueString, out dateProp);
                         }
-                            }
-                            else
-                                valueString = null;
-
-                        }
-                        else
-                            valueString = null;
+                        valueString = dateProp.ToString(_dateTimeFormatString);
                     }
                     break;
                 case "bit":
                     {
                         if (valueString.Length > 0)
                         {
-                            if (Boolean.TryParse(valueString, out bool boolProp))
-                            {
-                                valueString = boolProp.ToString(_cultureInfo);
-                            }
-                            else
-                                valueString = null;
+                            Boolean.TryParse(valueString, out boolProp);
                         }
+                        valueString = boolProp.ToString(_cultureInfo);
                     }
                     break;
 
