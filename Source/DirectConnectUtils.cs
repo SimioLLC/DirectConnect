@@ -1638,14 +1638,14 @@ namespace DirectConnect
                         {
                             switch ( valueString.ToLower())
                             {
-                                case "∞":
+                                case "\u221E":
                                 case "infinity":
                                     {
                                         valueString = MaxSqlReal.ToString();
                                     }
                                     break;
 
-                                case "-∞":
+                                case "-\u221E":
                                 case "-infinity":
                                     {
                                         valueString = (MinSqlReal).ToString();
