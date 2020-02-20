@@ -51,3 +51,16 @@ C:\Users\KatieProchaska\Documents\GitHub\DirectConnect\Source\obj\Debug\DirectCo
 C:\Users\KatieProchaska\Documents\GitHub\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CoreCompileInputs.cache
 C:\Users\KatieProchaska\Documents\GitHub\DirectConnect\Source\obj\Debug\DirectConnect.dll
 C:\Users\KatieProchaska\Documents\GitHub\DirectConnect\Source\obj\Debug\DirectConnect.pdb
+C:\Users\dan_h\source\repos\SimioLLC\SimioUserExtensions\DirectConnect.dll
+C:\Users\dan_h\source\repos\SimioLLC\SimioUserExtensions\DirectConnect.pdb
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.csprojAssemblyReference.cache
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.DirectConnectSettingsDialog.resources
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.LogWindow.resources
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.Properties.Resources.resources
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.StatusWindow.resources
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.SaveToDatabaseWindow.resources
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.csproj.GenerateResource.cache
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CoreCompileInputs.cache
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CopyComplete
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.dll
+C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.pdb
