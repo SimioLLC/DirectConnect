@@ -31,7 +31,7 @@ namespace DirectConnect
         private static CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private static string _dateTimeFormatString = string.Empty;
 
-        public const double MaxSqlFloat =  1.0E+308; // designed to be memorable
+        public const double MaxSqlFloat =  1.0E+38; // designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
         public const double MaxSqlReal = 1.0E+38; // designed to be memorable
@@ -473,7 +473,53 @@ namespace DirectConnect
                     // ... and also create a Column for each Custom Column
                     foreach (ILogExpression logExpression in runtimeLog.RuntimeLogExpressions)
                     {
-                        dt.Columns.Add(logExpression.DisplayName, typeof(String));
+                        var dataFormat = logExpression.DataFormat; // Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
+                        Type columnType;
+                        switch ( dataFormat )
+                        {
+                            case ExpressionDataFormat.Real:
+                                {
+                                    columnType = typeof(double);
+                                }
+                                break;
+                            case ExpressionDataFormat.Integer:
+                                {
+                                    columnType = typeof(int);
+                                }
+                                break;
+                            case ExpressionDataFormat.Boolean:
+                                {
+                                    columnType = typeof(bool);
+                                }
+                                break;
+                            case ExpressionDataFormat.DateTime:
+                                {
+                                    columnType = typeof(DateTime);
+                                }
+                                break;
+                            case ExpressionDataFormat.TimeSpan:
+                                {
+                                    columnType = typeof(double);
+                                }
+                                break;
+                            case ExpressionDataFormat.String:
+                                {
+                                    columnType = typeof(string);
+                                }
+                                break;
+                            case ExpressionDataFormat.Color:
+                                {
+                                    columnType = typeof(string);
+                                }
+                                break;
+
+                            default:
+                                columnType = typeof(string);
+                                break;
+                        }
+                        //Type validType = GetValidClrType(propertyType);
+                        Type validType = GetValidClrType(columnType);
+                        dt.Columns.Add(logExpression.DisplayName, validType);
                     }
 
                     // If we have any runtimelogExpressions, then create a reference
@@ -1629,6 +1675,8 @@ namespace DirectConnect
                             else
                                 valueString = null;
                         }
+                        else
+                            valueString = null;
                     }
                     break;
 
@@ -1636,7 +1684,7 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            switch ( valueString.ToLower())
+                            switch (valueString.ToLower())
                             {
                                 case "\u221E":
                                 case "infinity":
@@ -1670,6 +1718,8 @@ namespace DirectConnect
                                     break;
                             }
                         }
+                        else
+                            valueString = null;
                     }
                     break;
 
@@ -1704,6 +1754,8 @@ namespace DirectConnect
                             else
                                 valueString = null;
                         }
+                        else
+                            valueString = null;
                     }
                     break;
 
@@ -1760,6 +1812,8 @@ namespace DirectConnect
                     return "datetime";
                 case IBooleanTableStateColumn cc:
                     return "bit";
+                case IStringTableStateColumn cc:
+                    return "nvarchar(1000)";
                 default:
                     return "nvarchar(1000)";
             }

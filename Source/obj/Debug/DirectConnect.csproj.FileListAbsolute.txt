@@ -64,3 +64,6 @@ C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Deb
 C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CopyComplete
 C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.dll
 C:\Users\dan_h\source\repos\SimioLLC\DirectConnect2\DirectConnect\Source\obj\Debug\DirectConnect.pdb
+E:\Documents\SimioUserExtensions\DirectConnect.dll
+E:\Documents\SimioUserExtensions\DirectConnect.pdb
+E:\(svn azure)\SimioCloud\Github\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CopyComplete
