@@ -32,8 +32,11 @@ namespace DirectConnect
         private static string _dateTimeFormatString = string.Empty;
         private static string _diagnosticLogsPath = string.Empty;
 
-        public const double MaxSqlFloat =  1.0+308; // designed to be memorable
+        public const double MaxSqlFloat = 1.0E+308; // designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
+
+        public const double MaxSqlReal = 1.0E+38; // designed to be memorable
+        public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
 
         /// <summary>
         /// Where to write the DirectConnect logs.
@@ -1419,8 +1422,10 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Convert a Simio Table to a DataTable.
-        /// The table can contain either property or State values
+        /// Convert a Simio Table to a System.Data.DataTable.
+        /// The table can contain either Property or State values
+        /// Reals that cannot be parsed or are NaN, infinity, or -infinity are converted to null.
+        /// DateTimes that cannot be parsed are converted to null.
         /// The returned result is a Microsoft DataTabe.
         /// </summary>
         /// <param name="table"></param>
@@ -1496,6 +1501,8 @@ namespace DirectConnect
                 }
                 tableList.Add(thisRow.ToArray());
             }
+
+        DoneWithRows:;
 
             // New table.
             var dataTable = new DataTable();
@@ -1608,10 +1615,7 @@ namespace DirectConnect
         /// <returns></returns>
         private static string GetFormattedStringValue(String valueString, String dataType)
         {
-            DateTime dateProp = Convert.ToDateTime("2008-01-01 00:00:00");
-            Double doubleProp = 0.0;
-            Int64 intProp = 0;
-            Boolean boolProp = false;
+
 
             switch (dataType)
             {
@@ -1619,9 +1623,13 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out intProp);
+                            if (Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out long intProp))
+                            {
+                                valueString = intProp.ToString(_cultureInfo);
+                            }
+                            else
+                                valueString = null;
                         }
-                        valueString = intProp.ToString(_cultureInfo);
                     }
                     break;
 
@@ -1629,9 +1637,40 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out doubleProp);
+                            switch ( valueString.ToLower())
+                            {
+                                case "\u221E":  // Unicode infinity character
+                                case "infinity":
+                                    {
+                                        valueString = MaxSqlReal.ToString();
+                                    }
+                                    break;
+
+                                case "-\u221E": // Unicode infinity character
+                                case "-infinity": 
+                                    {
+                                        valueString = (MinSqlReal).ToString();
+                                    }
+                                    break;
+
+                                case "nan":
+                                    {
+                                        valueString = null;
+                                    }
+                                    break;
+
+                                default:
+                                    {
+                                        if (Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleProp))
+                                        {
+                                            valueString = doubleProp.ToString(_cultureInfo);
+                                        }
+                                        else
+                                            valueString = null;
+                                    }
+                                    break;
+                            }
                         }
-                        valueString = doubleProp.ToString(_cultureInfo);
                     }
                     break;
 
@@ -1639,18 +1678,33 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            DateTime.TryParse(valueString, out dateProp);
+                            if (DateTime.TryParse(valueString, out DateTime dateProp))
+                            {
+                                valueString = dateProp.ToString(_cultureInfo);
+                                if (dateProp.Year < 1753 || dateProp.Year > 9999) // SQL range
+                                {
+                                    valueString = null;
                         }
-                        valueString = dateProp.ToString(_dateTimeFormatString);
+                            }
+                            else
+                                valueString = null;
+
+                        }
+                        else
+                            valueString = null;
                     }
                     break;
                 case "bit":
                     {
                         if (valueString.Length > 0)
                         {
-                            Boolean.TryParse(valueString, out boolProp);
+                            if (Boolean.TryParse(valueString, out bool boolProp))
+                            {
+                                valueString = boolProp.ToString(_cultureInfo);
+                            }
+                            else
+                                valueString = null;
                         }
-                        valueString = boolProp.ToString(_cultureInfo);
                     }
                     break;
 
