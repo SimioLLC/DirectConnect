@@ -151,6 +151,7 @@ namespace DirectConnect
             // The context contains various model events you can subscribe to. You will usually
             //  want to unsubscribe from the event in the implementation of Dispose()
             _context.ModelSaved += _context_ModelSaved;
+            ////_context.ModelPlanRunEnded += _context_ModelPlanRunEnded;
             //    _context.ModelTablesImporting += _context_ModelTablesImporting;
             //    _context.ModelTablesImported += _context_ModelTablesImported;
         }
@@ -204,21 +205,21 @@ namespace DirectConnect
 
                 StringBuilder sbSaveMessage = new StringBuilder();
 
-                if ( saveTables )
+                if (saveTables)
                 {
                     int tablesSaved = 0;
                     DirectConnectUtils.SaveSimioTablesToDB(_context.Model, String.Empty, ref tablesSaved);
                     sbSaveMessage.AppendLine($"Done. Number Of Tables Exported: {tablesSaved}");
                 } // non-interactive, or user says ok to save
 
-                if ( saveLogs )
+                if (saveLogs)
                 {
                     int logsSaved = 0;
-                    DirectConnectUtils.SaveSimioLogsToDB(_context.Model, ref logsSaved );
+                    DirectConnectUtils.SaveSimioLogsToDB(_context.Model, ref logsSaved);
                     sbSaveMessage.AppendLine($"Done. Number Of Logs Exported: {logsSaved}");
                 } // non-interactive, or user says ok to save
 
-                ShowStatus(isInteractive, "Exported", sbSaveMessage.ToString() );
+                ShowStatus(isInteractive, "Exported", sbSaveMessage.ToString());
 
             }
             catch (Exception ex)
@@ -227,6 +228,55 @@ namespace DirectConnect
             }
         }
 
+        ////private void _context_ModelPlanRunEnded(IModelPlanRunEndedArgs args)
+        ////{
+        ////    //
+        ////    // This is the handler for the "Model Saved" event, this is the bulk of the "helping" logic
+        ////    //
+        ////    bool isInteractive = _context.AddInEnvironment == ModelAddInEnvironment.InteractiveDesktop;
+
+        ////    try
+        ////    {
+
+        ////        // First the tables
+        ////        Boolean saveTables = true;
+        ////        Boolean saveLogs = true;
+
+        ////        //if (isInteractive)
+        ////        //{
+        ////        //    saveTables = false;
+        ////        //    saveLogs = false;
+        ////        //}
+        ////        if (isInteractive)
+        ////        {
+        ////            SaveDataToSql("Export Simio Tables/Logs Back To SQL Server?", "Export Tables/Logs To SQL Server",
+        ////            out saveTables, out saveLogs);
+        ////        }
+
+        ////        StringBuilder sbSaveMessage = new StringBuilder();
+
+        ////        if (saveTables)
+        ////        {
+        ////            int tablesSaved = 0;
+        ////            DirectConnectUtils.SaveSimioTablesToDB(_context.Model, String.Empty, ref tablesSaved);
+        ////            sbSaveMessage.AppendLine($"Done. Number Of Tables Exported: {tablesSaved}");
+        ////        } // non-interactive, or user says ok to save
+
+        ////        if (saveLogs)
+        ////        {
+        ////            int logsSaved = 0;
+        ////            DirectConnectUtils.SaveSimioLogsToDB(_context.Model, ref logsSaved);
+        ////            sbSaveMessage.AppendLine($"Done. Number Of Logs Exported: {logsSaved}");
+        ////        } // non-interactive, or user says ok to save
+
+        ////        ShowStatus(isInteractive, "Exported", sbSaveMessage.ToString());
+
+        ////    }
+        ////    catch (Exception ex)
+        ////    {
+        ////        ShowStatus(isInteractive, "Export Error", $"Error Saving: {ex.Message}");
+        ////    }
+        ////}
         /// <summary>
         /// Show the status window, and wait for the user to respond.
         /// </summary>
@@ -286,6 +336,7 @@ namespace DirectConnect
 
             // Unsubscribing from the events here, as we no longer need to listen to them,
             _context.ModelSaved -= _context_ModelSaved;
+            ////_context.ModelPlanRunEnded -= _context_ModelPlanRunEnded;
             //_context.ModelTablesImporting -= _context_ModelTablesImporting;
             //_context.ModelTablesImported -= _context_ModelTablesImported;
         }

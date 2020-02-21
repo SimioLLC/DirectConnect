@@ -282,3 +282,4 @@ ModelManifest.xml
 *.vcxproj.FileListAbsolute.txt
 /Src/SimioServerInstall/websitepackage/PackageTmp
 
+/Source/obj/Debug

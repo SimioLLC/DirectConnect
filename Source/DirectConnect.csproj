@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\Documents\SimioUserExtensions\</OutputPath>
+    <OutputPath>..\..\..\SimioUserExtensions\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SimioAPI">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Simio202\SimioAPI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Simio\SimioAPI.dll</HintPath>
     </Reference>
     <Reference Include="SimioAPI.Extensions">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Simio202\SimioAPI.Extensions.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Simio\SimioAPI.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
