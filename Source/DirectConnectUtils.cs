@@ -32,11 +32,11 @@ namespace DirectConnect
         private static string _dateTimeFormatString = string.Empty;
         private static string _diagnosticLogsPath = string.Empty;
 
-        public const double MaxSqlFloat =  1.0E+38; // designed to be memorable
+        public const double MaxSqlFloat =  1.0E+308; // (SQL 8 byte) designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
-        public const double MaxSqlReal = 1.0E+38; // designed to be memorable
-        public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
+        ////public const double MaxSqlReal = 1.0E+38; // designed to be memorable
+        ////public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
 
         /// <summary>
         /// Where to write the DirectConnect logs.
@@ -50,6 +50,7 @@ namespace DirectConnect
         /// Note: This assumes SQL Server 2008+ and.NET Framework 3.5 SP1
         /// Also, there are imperfect corner cases: the SQL Time is only 0-23:59:59.9999999 and
         /// therefore probably not a good fit for TimeSpan.
+        /// Note: {Feb2020/dth} The System.Single is now set to the SQL FLOAT
         /// </summary>
         private static List<Tuple<string, String>> ClrToSqlList { get; set; } = new List<Tuple<string, string>>
             {
@@ -63,7 +64,7 @@ namespace DirectConnect
                 ,new Tuple<String, string> ("System.UInt32", "BIGINT")
                 ,new Tuple<String, string> ("System.UInt64", "DECIMAL(20)")
                 ,new Tuple<String, string> ("System.Decimal", "DECIMAL(29,4)")
-                ,new Tuple<String, string> ("System.Single", "REAL")
+                ,new Tuple<String, string> ("System.Single", "FLOAT")
                 ,new Tuple<String, string> ("System.Double", "FLOAT")
                 ,new Tuple<String, string> ("System.String", "NVARCHAR(MAX)")
                 ,new Tuple<String, string> ("System.DateTime", "DATETIME")
@@ -645,11 +646,11 @@ namespace DirectConnect
                                 fieldValue = DBNull.Value;
                             else if ( Single.IsPositiveInfinity((Single)fieldValue))
                             {
-                                fieldValue = MaxSqlReal;
+                                fieldValue = MaxSqlFloat;
                             }
                             else if ( Single.IsNegativeInfinity((Single)fieldValue))
                             {
-                                fieldValue = MinSqlReal;
+                                fieldValue = MinSqlFloat;
                             }
 
                             break;
@@ -1474,10 +1475,10 @@ namespace DirectConnect
         /// DateTimes that cannot be parsed are converted to null.
         /// The returned result is a Microsoft DataTabe.
         /// </summary>
-        /// <param name="table"></param>
+        /// <param name="simioTable"></param>
         /// <param name="sqlColumnInfoList"></param>
         /// <returns></returns>
-        internal static DataTable ConvertSimioTableToDataTable(ITable table, List<GridDataColumnInfo> sqlColumnInfoList)
+        internal static DataTable ConvertSimioTableToDataTable(ITable simioTable, List<GridDataColumnInfo> sqlColumnInfoList)
         {
             List<string[]> tableList = new List<string[]>();
             int rowNumber = 0;
@@ -1493,7 +1494,7 @@ namespace DirectConnect
             List<string> stateColDataTypes = new List<string>();
 
             // get column data
-            foreach (var col in table.Columns)
+            foreach (var col in simioTable.Columns)
             {
                 foreach (var sqlColumnInfo in sqlColumnInfoList)
                 {
@@ -1508,7 +1509,7 @@ namespace DirectConnect
 
             // get state column names
             List<string> stateColNames = new List<string>();
-            foreach (var stateCol in table.StateColumns)
+            foreach (var stateCol in simioTable.StateColumns)
             {
                 foreach (var dbColumnName in sqlColumnInfoList)
                 {
@@ -1523,7 +1524,7 @@ namespace DirectConnect
             tableList.Add(colNames.ToArray());
 
             // Get Row Data
-            foreach (var row in table.Rows)
+            foreach (var row in simioTable.Rows)
             {
                 rowNumber++;
                 int arrayIdx = -1;
@@ -1541,8 +1542,8 @@ namespace DirectConnect
                 foreach (var array in stateColNames)
                 {
                     arrayIdx++;
-                    if (table.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue != null)
-                        thisRow.Add(GetFormattedStringValue(table.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue.ToString(), stateColDataTypes[arrayIdx]));
+                    if (simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue != null)
+                        thisRow.Add(GetFormattedStringValue(simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue.ToString(), stateColDataTypes[arrayIdx]));
                     else thisRow.Add(GetFormattedStringValue("", stateColDataTypes[arrayIdx]));
                 }
                 tableList.Add(thisRow.ToArray());
@@ -1550,7 +1551,7 @@ namespace DirectConnect
 
             // New table.
             var dataTable = new DataTable();
-            dataTable.TableName = table.Name;
+            dataTable.TableName = simioTable.Name;
 
             // Get max columns.
             int columns = 0;
@@ -1688,14 +1689,14 @@ namespace DirectConnect
                                 case "\u221E":  // Unicode infinity character
                                 case "infinity":
                                     {
-                                        valueString = MaxSqlReal.ToString();
+                                        valueString = MaxSqlFloat.ToString();
                                     }
                                     break;
 
                                 case "-\u221E": // Unicode infinity character
                                 case "-infinity": 
                                     {
-                                        valueString = (MinSqlReal).ToString();
+                                        valueString = (MinSqlFloat).ToString();
                                     }
                                     break;
 
@@ -1766,7 +1767,7 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Get the column type of a Simio table column.
+        /// Return the SQL column type of a Simio table column.
         /// There are more types, but we are only dealing with real, int, datetime, and bit.
         /// Anything else is nvarchar(1000)
         /// </summary>
@@ -1778,7 +1779,7 @@ namespace DirectConnect
             switch (col)
             {
                 case IRealTableColumn cc:
-                    return "real";
+                    return "float";
                 case IIntegerTableColumn cc:
                     return "int";
                 case IDateTimeTableColumn cc:
@@ -1804,7 +1805,7 @@ namespace DirectConnect
             switch (stateCol)
             {
                 case IRealTableStateColumn cc:
-                    return "real";
+                    return "float";
                 case IIntegerTableStateColumn cc:
                     return "int";
                 case IDateTimeTableStateColumn cc:
