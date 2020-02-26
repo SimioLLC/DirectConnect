@@ -31,9 +31,11 @@ namespace DirectConnect
         private static CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private static string _dateTimeFormatString = string.Empty;
 
-        public const double MaxSqlFloat =  1.0+308; // designed to be memorable
+        public const double MaxSqlFloat =  1.0E+308; // designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
+        ////public const double MaxSqlReal = 1.0E+38; // designed to be memorable
+        ////public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
 
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace DirectConnect
                 ,new Tuple<String, string> ("System.UInt32", "BIGINT")
                 ,new Tuple<String, string> ("System.UInt64", "DECIMAL(20)")
                 ,new Tuple<String, string> ("System.Decimal", "DECIMAL(29,4)")
-                ,new Tuple<String, string> ("System.Single", "REAL")
+                ,new Tuple<String, string> ("System.Single", "FLOAT")
                 ,new Tuple<String, string> ("System.Double", "FLOAT")
                 ,new Tuple<String, string> ("System.String", "NVARCHAR(MAX)")
                 ,new Tuple<String, string> ("System.DateTime", "DATETIME")
@@ -158,7 +160,8 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Called during the model load to set up tables that can specify export actions.
+        /// Called during the model load to set up an 'action' tables that are
+        /// used to specify export actions for (1) tables, (2) logs
         /// </summary>
         /// <param name="model"></param>
         public static void NewModelSetup(IModel model)
@@ -470,7 +473,53 @@ namespace DirectConnect
                     // ... and also create a Column for each Custom Column
                     foreach (ILogExpression logExpression in runtimeLog.RuntimeLogExpressions)
                     {
-                        dt.Columns.Add(logExpression.DisplayName, typeof(String));
+                        var dataFormat = logExpression.DataFormat; // Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
+                        Type columnType;
+                        switch ( dataFormat )
+                        {
+                            case ExpressionDataFormat.Real:
+                                {
+                                    columnType = typeof(double);
+                                }
+                                break;
+                            case ExpressionDataFormat.Integer:
+                                {
+                                    columnType = typeof(int);
+                                }
+                                break;
+                            case ExpressionDataFormat.Boolean:
+                                {
+                                    columnType = typeof(bool);
+                                }
+                                break;
+                            case ExpressionDataFormat.DateTime:
+                                {
+                                    columnType = typeof(DateTime);
+                                }
+                                break;
+                            case ExpressionDataFormat.TimeSpan:
+                                {
+                                    columnType = typeof(double);
+                                }
+                                break;
+                            case ExpressionDataFormat.String:
+                                {
+                                    columnType = typeof(string);
+                                }
+                                break;
+                            case ExpressionDataFormat.Color:
+                                {
+                                    columnType = typeof(string);
+                                }
+                                break;
+
+                            default:
+                                columnType = typeof(string);
+                                break;
+                        }
+                        //Type validType = GetValidClrType(propertyType);
+                        Type validType = GetValidClrType(columnType);
+                        dt.Columns.Add(logExpression.DisplayName, validType);
                     }
 
                     // If we have any runtimelogExpressions, then create a reference
@@ -560,7 +609,7 @@ namespace DirectConnect
         /// 1. Null is replaced with DBNull
         /// 2. Floating points with NaN are replaced with DBNull.
         /// 3. DateTimes that are Min or Max valued are replaced with DBNull.
-        /// 4. Flaoting points with Infinity are replaced with MAX SQL value
+        /// 4. Floating points with Infinity are replaced with MAX SQL value
         /// </summary>
         /// <param name="fieldValue"></param>
         /// <returns></returns>
@@ -1070,7 +1119,7 @@ namespace DirectConnect
 
         /// <summary>
         /// Select a valid CLR type that will work with SQL Types
-        /// If it is not int the ClrToSql list, then it will default to NVARCHAR(MAX)
+        /// If it is not in the ClrToSql list, then it is set to System.String, which will default to NVARCHAR(MAX)
         /// </summary>
         /// <param name="clrType"></param>
         /// <returns></returns>
@@ -1080,8 +1129,7 @@ namespace DirectConnect
             string clrTypeName = clrType.ToString();
 
             Tuple<string, string> tuple = ClrToSqlList
-                .SingleOrDefault(rr => rr.Item1.ToLower() == clrTypeName
-                .ToLower());
+                .SingleOrDefault(rr => rr.Item1.ToLower() == clrTypeName.ToLower());
 
             if (tuple != null)
                 validType = tuple.Item1;
@@ -1337,20 +1385,22 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Check Simio Table columns against the SQL database columns.
+        /// A schema check of the Simio Table columns against the SQL database columns.
+        /// We are looking to make sure the the column names in Simio tables and SQL table match (case insensitive)
+        /// (and vice versa). Detailed exceptions are thrown if this is not the case.
         /// </summary>
-        /// <param name="table"></param>
+        /// <param name="simioTable"></param>
         /// <param name="dbColumnNames"></param>
-        internal static void CheckSimioTableColumnsAgainstDatabaseColumns(ITable table, List<GridDataColumnInfo> dbColumnNames)
+        internal static void CheckSimioTableColumnsAgainstDatabaseColumns(ITable simioTable, List<GridDataColumnInfo> dbColumnNames)
         {
             foreach (var dbColumnName in dbColumnNames)
             {
                 if (dbColumnName.Name == "Id")
                 {
-                    break;
+                    break; // ?? should this be continue ??
                 }
                 Boolean foundFlag = false;
-                foreach (var col in table.Columns)
+                foreach (var col in simioTable.Columns)
                 {
                     if (dbColumnName.Name == col.Name)
                     {
@@ -1360,7 +1410,7 @@ namespace DirectConnect
                 }
                 if (foundFlag == false) // if not in columns, check the states
                 {
-                    foreach (var stateCol in table.StateColumns)
+                    foreach (var stateCol in simioTable.StateColumns)
                     {
                         if (dbColumnName.Name == stateCol.Name)
                         {
@@ -1378,7 +1428,7 @@ namespace DirectConnect
                 }
             }
 
-            foreach (var col in table.Columns)
+            foreach (var col in simioTable.Columns)
             {
                 Boolean foundFlag = false;
                 foreach (var dbColumnName in dbColumnNames)
@@ -1398,7 +1448,7 @@ namespace DirectConnect
                 }
             }
 
-            foreach (var stateCol in table.StateColumns)
+            foreach (var stateCol in simioTable.StateColumns)
             {
                 Boolean foundFlag = false;
                 foreach (var dbColumnName in dbColumnNames)
@@ -1420,8 +1470,10 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Convert a Simio Table to a DataTable.
-        /// The table can contain either property or State values
+        /// Convert a Simio Table to a System.Data.DataTable.
+        /// The table can contain either Property or State values
+        /// Reals that cannot be parsed or are NaN, infinity, or -infinity are converted to null.
+        /// DateTimes that cannot be parsed are converted to null.
         /// The returned result is a Microsoft DataTabe.
         /// </summary>
         /// <param name="table"></param>
@@ -1609,10 +1661,6 @@ namespace DirectConnect
         /// <returns></returns>
         private static string GetFormattedStringValue(String valueString, String dataType)
         {
-            DateTime dateProp = Convert.ToDateTime("2008-01-01 00:00:00");
-            Double doubleProp = 0.0;
-            Int64 intProp = 0;
-            Boolean boolProp = false;
 
             switch (dataType)
             {
@@ -1620,9 +1668,15 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out intProp);
+                            if (Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out long intProp))
+                            {
+                                valueString = intProp.ToString(_cultureInfo);
+                            }
+                            else
+                                valueString = null;
                         }
-                        valueString = intProp.ToString(_cultureInfo);
+                        else
+                            valueString = null;
                     }
                     break;
 
@@ -1630,9 +1684,42 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out doubleProp);
+                            switch (valueString.ToLower())
+                            {
+                                case "\u221E":
+                                case "infinity":
+                                    {
+                                        valueString = MaxSqlFloat.ToString();
+                                    }
+                                    break;
+
+                                case "-\u221E":
+                                case "-infinity":
+                                    {
+                                        valueString = (MinSqlFloat).ToString();
+                                    }
+                                    break;
+
+                                case "nan":
+                                    {
+                                        valueString = null;
+                                    }
+                                    break;
+
+                                default:
+                                    {
+                                        if (Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleProp))
+                                        {
+                                            valueString = doubleProp.ToString(_cultureInfo);
+                                        }
+                                        else
+                                            valueString = null;
+                                    }
+                                    break;
+                            }
                         }
-                        valueString = doubleProp.ToString(_cultureInfo);
+                        else
+                            valueString = null;
                     }
                     break;
 
@@ -1640,18 +1727,35 @@ namespace DirectConnect
                     {
                         if (valueString.Length > 0)
                         {
-                            DateTime.TryParse(valueString, out dateProp);
+                            if (DateTime.TryParse(valueString, out DateTime dateProp))
+                            {
+                                valueString = dateProp.ToString(_cultureInfo);
+                                if (dateProp.Year < 1753 || dateProp.Year > 9999) // SQL range
+                                {
+                                    valueString = null;
+                                }
+                            }
+                            else
+                                valueString = null;
+
                         }
-                        valueString = dateProp.ToString(_dateTimeFormatString);
+                        else
+                            valueString = null;
                     }
                     break;
                 case "bit":
                     {
                         if (valueString.Length > 0)
                         {
-                            Boolean.TryParse(valueString, out boolProp);
+                            if (Boolean.TryParse(valueString, out bool boolProp))
+                            {
+                                valueString = boolProp.ToString(_cultureInfo);
+                            }
+                            else
+                                valueString = null;
                         }
-                        valueString = boolProp.ToString(_cultureInfo);
+                        else
+                            valueString = null;
                     }
                     break;
 
@@ -1675,7 +1779,7 @@ namespace DirectConnect
             switch (col)
             {
                 case IRealTableColumn cc:
-                    return "real";
+                    return "float";
                 case IIntegerTableColumn cc:
                     return "int";
                 case IDateTimeTableColumn cc:
@@ -1688,19 +1792,28 @@ namespace DirectConnect
 
         }
 
+        /// <summary>
+        /// Return the SQL type for the State type.
+        /// Only simple types (real, int, datetime, bit) are converted,
+        /// and anything else is set the nvarchar(1000)
+        /// </summary>
+        /// <param name="stateCol"></param>
+        /// <returns></returns>
         private static string GetSimioTableStateColumnType(ITableStateColumn stateCol)
         {
 
             switch (stateCol)
             {
                 case IRealTableStateColumn cc:
-                    return "real";
+                    return "float";
                 case IIntegerTableStateColumn cc:
                     return "int";
                 case IDateTimeTableStateColumn cc:
                     return "datetime";
                 case IBooleanTableStateColumn cc:
                     return "bit";
+                case IStringTableStateColumn cc:
+                    return "nvarchar(1000)";
                 default:
                     return "nvarchar(1000)";
             }

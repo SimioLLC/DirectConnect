@@ -31,12 +31,16 @@ namespace DirectConnect
         private static CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private static string _dateTimeFormatString = string.Empty;
 
-        public const double MaxSqlFloat =  1.0E+308; // designed to be memorable
+        public const double MaxSqlFloat =  1.0E+308; // (SQL 8 byte) designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
         ////public const double MaxSqlReal = 1.0E+38; // designed to be memorable
         ////public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
 
+        /// <summary>
+        /// Where to write the DirectConnect logs.
+        /// </summary>
+        public static string DirectConnectLogPath { get; set; }
 
         /// <summary>
         /// Returns a list of tuples that are ClrType and corresponding SqlType(as strings)
@@ -45,6 +49,7 @@ namespace DirectConnect
         /// Note: This assumes SQL Server 2008+ and.NET Framework 3.5 SP1
         /// Also, there are imperfect corner cases: the SQL Time is only 0-23:59:59.9999999 and
         /// therefore probably not a good fit for TimeSpan.
+        /// Note: {Feb2020/dth} The System.Single is now set to the SQL FLOAT
         /// </summary>
         private static List<Tuple<string, String>> ClrToSqlList { get; set; } = new List<Tuple<string, string>>
             {
@@ -813,7 +818,7 @@ namespace DirectConnect
 
             if (_connection.State == ConnectionState.Closed)
             {
-                throw new Exception("Connection Is Closed.  Fix Connection String, Save and Reopen Model");
+                throw new Exception($"Connection Is Closed.  Fix Connection String ({_connectionString}), Save and Reopen Model");
             }
 
         }
@@ -1476,10 +1481,10 @@ namespace DirectConnect
         /// DateTimes that cannot be parsed are converted to null.
         /// The returned result is a Microsoft DataTabe.
         /// </summary>
-        /// <param name="table"></param>
+        /// <param name="simioTable"></param>
         /// <param name="sqlColumnInfoList"></param>
         /// <returns></returns>
-        internal static DataTable ConvertSimioTableToDataTable(ITable table, List<GridDataColumnInfo> sqlColumnInfoList)
+        internal static DataTable ConvertSimioTableToDataTable(ITable simioTable, List<GridDataColumnInfo> sqlColumnInfoList)
         {
             List<string[]> tableList = new List<string[]>();
             int rowNumber = 0;
@@ -1495,7 +1500,7 @@ namespace DirectConnect
             List<string> stateColDataTypes = new List<string>();
 
             // get column data
-            foreach (var col in table.Columns)
+            foreach (var col in simioTable.Columns)
             {
                 foreach (var sqlColumnInfo in sqlColumnInfoList)
                 {
@@ -1510,7 +1515,7 @@ namespace DirectConnect
 
             // get state column names
             List<string> stateColNames = new List<string>();
-            foreach (var stateCol in table.StateColumns)
+            foreach (var stateCol in simioTable.StateColumns)
             {
                 foreach (var dbColumnName in sqlColumnInfoList)
                 {
@@ -1525,7 +1530,7 @@ namespace DirectConnect
             tableList.Add(colNames.ToArray());
 
             // Get Row Data
-            foreach (var row in table.Rows)
+            foreach (var row in simioTable.Rows)
             {
                 rowNumber++;
                 int arrayIdx = -1;
@@ -1543,8 +1548,8 @@ namespace DirectConnect
                 foreach (var array in stateColNames)
                 {
                     arrayIdx++;
-                    if (table.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue != null)
-                        thisRow.Add(GetFormattedStringValue(table.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue.ToString(), stateColDataTypes[arrayIdx]));
+                    if (simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue != null)
+                        thisRow.Add(GetFormattedStringValue(simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue.ToString(), stateColDataTypes[arrayIdx]));
                     else thisRow.Add(GetFormattedStringValue("", stateColDataTypes[arrayIdx]));
                 }
                 tableList.Add(thisRow.ToArray());
@@ -1552,7 +1557,7 @@ namespace DirectConnect
 
             // New table.
             var dataTable = new DataTable();
-            dataTable.TableName = table.Name;
+            dataTable.TableName = simioTable.Name;
 
             // Get max columns.
             int columns = 0;
@@ -1681,19 +1686,20 @@ namespace DirectConnect
                     break;
 
                 case "real":
+                case "float":
                     {
                         if (valueString.Length > 0)
                         {
                             switch (valueString.ToLower())
                             {
-                                case "\u221E":
+                                case "\u221E":  // Unicode infinity character
                                 case "infinity":
                                     {
                                         valueString = MaxSqlFloat.ToString();
                                     }
                                     break;
 
-                                case "-\u221E":
+                                case "-\u221E": // Unicode infinity character
                                 case "-infinity":
                                     {
                                         valueString = (MinSqlFloat).ToString();
@@ -1767,7 +1773,7 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Get the column type of a Simio table column.
+        /// Return the SQL column type of a Simio table column.
         /// There are more types, but we are only dealing with real, int, datetime, and bit.
         /// Anything else is nvarchar(1000)
         /// </summary>
