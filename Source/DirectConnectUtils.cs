@@ -31,11 +31,11 @@ namespace DirectConnect
         private static CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private static string _dateTimeFormatString = string.Empty;
 
-        public const double MaxSqlFloat =  1.0E+38; // designed to be memorable
+        public const double MaxSqlFloat =  1.0E+308; // designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
-        public const double MaxSqlReal = 1.0E+38; // designed to be memorable
-        public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
+        ////public const double MaxSqlReal = 1.0E+38; // designed to be memorable
+        ////public const double MinSqlReal = -MaxSqlReal; // designed to be memorable
 
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace DirectConnect
                 ,new Tuple<String, string> ("System.UInt32", "BIGINT")
                 ,new Tuple<String, string> ("System.UInt64", "DECIMAL(20)")
                 ,new Tuple<String, string> ("System.Decimal", "DECIMAL(29,4)")
-                ,new Tuple<String, string> ("System.Single", "REAL")
+                ,new Tuple<String, string> ("System.Single", "FLOAT")
                 ,new Tuple<String, string> ("System.Double", "FLOAT")
                 ,new Tuple<String, string> ("System.String", "NVARCHAR(MAX)")
                 ,new Tuple<String, string> ("System.DateTime", "DATETIME")
@@ -641,11 +641,11 @@ namespace DirectConnect
                                 fieldValue = DBNull.Value;
                             else if ( Single.IsPositiveInfinity((Single)fieldValue))
                             {
-                                fieldValue = MaxSqlReal;
+                                fieldValue = MaxSqlFloat;
                             }
                             else if ( Single.IsNegativeInfinity((Single)fieldValue))
                             {
-                                fieldValue = MinSqlReal;
+                                fieldValue = MinSqlFloat;
                             }
 
                             break;
@@ -1689,14 +1689,14 @@ namespace DirectConnect
                                 case "\u221E":
                                 case "infinity":
                                     {
-                                        valueString = MaxSqlReal.ToString();
+                                        valueString = MaxSqlFloat.ToString();
                                     }
                                     break;
 
                                 case "-\u221E":
                                 case "-infinity":
                                     {
-                                        valueString = (MinSqlReal).ToString();
+                                        valueString = (MinSqlFloat).ToString();
                                     }
                                     break;
 
@@ -1779,7 +1779,7 @@ namespace DirectConnect
             switch (col)
             {
                 case IRealTableColumn cc:
-                    return "real";
+                    return "float";
                 case IIntegerTableColumn cc:
                     return "int";
                 case IDateTimeTableColumn cc:
@@ -1805,7 +1805,7 @@ namespace DirectConnect
             switch (stateCol)
             {
                 case IRealTableStateColumn cc:
-                    return "real";
+                    return "float";
                 case IIntegerTableStateColumn cc:
                     return "int";
                 case IDateTimeTableStateColumn cc:

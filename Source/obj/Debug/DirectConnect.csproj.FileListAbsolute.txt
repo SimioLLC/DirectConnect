@@ -67,3 +67,5 @@ E:\Documents\SimioUserExtensions\DirectConnect.dll
 E:\Documents\SimioUserExtensions\DirectConnect.pdb
 E:\(svn azure)\SimioCloud\Github\DirectConnect\Source\obj\Debug\DirectConnect.csproj.CopyComplete
 E:\(svn azure)\SimioCloud\Github\DirectConnect\Source\obj\Debug\DirectConnect.csprojAssemblyReference.cache
+E:\(svn azure)\SimioCloud\SimioUserExtensions\DirectConnect.dll
+E:\(svn azure)\SimioCloud\SimioUserExtensions\DirectConnect.pdb
