@@ -988,7 +988,7 @@ namespace DirectConnect
                 }
 
                 // make sure simio tables and datababase tables align
-                marker += " CompareColumns";
+                marker += $" CompareColumns ({sqlColumnInfoList.Count} columns) ";
                 CheckSimioTableColumnsAgainstDatabaseColumns(table, sqlColumnInfoList);
 
                 // get table
@@ -1681,6 +1681,7 @@ namespace DirectConnect
                     break;
 
                 case "real":
+                case "float":
                     {
                         if (valueString.Length > 0)
                         {
