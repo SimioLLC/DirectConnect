@@ -1,0 +1,127 @@
+<Fragment>
+  <Compatibility ParseElementFunctionsInExpressionsLast="True" ParseNonEntityAssociatedObjectForPropertyReference="False" AllowInteractiveEntryOfNonStandardElementNames="False" />
+  <Lists />
+  <PropertyDefinitions>
+    <Categories>
+      <Category Name="Resource Logic" Description="Resource Logic" />
+      <Category Name="Reliability Logic" Description="Reliability Logic" InitiallyExpanded="False" />
+      <Category Name="Financials" Description="Financials" InitiallyExpanded="False" />
+      <Category Name="Financials/Resource Costs" Description="Resource Costs" InitiallyExpanded="False" />
+      <Category Name="Add-On Process Triggers" Description="Add-On Process Triggers" InitiallyExpanded="False" />
+      <Category Name="Advanced Options" Description="Advanced Options" InitiallyExpanded="False" />
+      <Category Name="Advanced Options/Deprecated Properties" Description="Advanced Options/Deprecated Properties" InitiallyExpanded="False" />
+    </Categories>
+    <Overrides>
+      <Override Name="ReportStatistics" DefaultValue="True" />
+      <Override Name="InitialCost" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="InitialCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceIdleCostRate" DefaultValue="Resources.CostRate" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceCostPerUse" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="ResourceUsageCostRate" DefaultValue="Resources.CostRate" DefaultUnitSubType="1380122624" />
+      <Override Name="LogResourceUsage" DefaultValue="True" />
+      <Override Name="DisplayCategory" DefaultValue="Resources.DisplayCategory" />
+      <Override Name="IncludeInPlanResourceConstraints" DefaultValue="True" />
+      <Override Name="CapacityType" DefaultValue="WorkSchedule" />
+      <Override Name="WorkSchedule" DefaultValue="Resources.WorkSchedule" />
+      <Override Name="WorkDayExceptions" DefaultValue="0 Rows" />
+      <Override Name="WorkPeriodExceptions" DefaultValue="0 Rows" />
+      <Override Name="InitialCapacity" DefaultValue="1" />
+      <Override Name="RankingRule" DefaultValue="First In First Out" />
+      <Override Name="RankingExpression" DefaultValue="0.0" />
+      <Override Name="DynamicSelectionRule" DefaultValue="None" />
+      <Override Name="CurrentSizeIndex" DefaultValue="SchedResource.ResourceState" />
+      <Override Name="TransferInConstraintsType" DefaultValue="Default" />
+      <Override Name="TransferOutConstraintsType" DefaultValue="Default" />
+      <Override Name="ExpectedSetupTimeExpression" DefaultValue="0.0" DefaultUnitSubType="0" />
+      <Override Name="ExpectedOperationTimeExpression" DefaultValue="0.0" DefaultUnitSubType="0" />
+      <Override Name="FailureType" DefaultValue="No Failures" />
+      <Override Name="CountBetweenFailures" DefaultValue="Random.Uniform(100,200)" />
+      <Override Name="UptimeBetweenFailures" DefaultValue="Random.Exponential(100)" DefaultUnitSubType="0" />
+      <Override Name="TimeToRepair" DefaultValue="Random.Triangular(0.5,1.0,1.5)" DefaultUnitSubType="0" />
+      <Override Name="CapitalCost" DefaultValue="0.0" DefaultUnitSubType="21059" />
+    </Overrides>
+  </PropertyDefinitions>
+  <States />
+  <Events />
+  <Elements />
+  <Processes />
+  <External>
+    <Graphics>
+      <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+        <SymbolRef Id="ff9df4e7-c487-4531-a221-8116b525c759" />
+      </SymbolInstance>
+      <DefaultAdditionalSymbols>
+        <DefaultAdditionalSymbol Index="0">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="1">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="3aaebbf4-884d-4258-96a4-164dfedabe55" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="2">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="57128ca7-5e7e-4e39-b3ed-78199c50a286" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="3">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="1a9b1e32-fd48-49a7-8949-9ce4291d9513" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="4">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="32d5d577-b2bc-42b8-9926-a18b0b26941b" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="5">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="346360a9-b9da-4386-9f4b-fea842d64972" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="6">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="bd03adb1-cbf9-4c18-abbc-66f76d266796" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+      </DefaultAdditionalSymbols>
+      <OffsetDynamicRelativeToExternalBounds Value="False" />
+    </Graphics>
+  </External>
+  <Graphics>
+    <AnimationSetup MinimumNumberOfFramesToDisplayIdleAnimation="10" />
+  </Graphics>
+</Fragment>
+<!-- CYtZ5GO8J1eMK3QSry4FroBYGrjaF++qfOi+KaxiY1bKHO+Ug9nT0+wbePiYPHRBgcDUpBMckJvaaWXKQGBCMA== -->

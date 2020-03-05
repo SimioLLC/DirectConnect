@@ -1,0 +1,655 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order01</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/10/2019 16:00:00</Property>
+      <Property Name="OrderStatus">WIP</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="29.913866388888888" PlanStatus="OnTime" UpperBound="200" PlanBounds="WithinBounds" InteractiveValue="29.514689166666667" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="1302.0621129993749" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="1296.6930598869967" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/03/2019 13:30:52" />
+        <StateValue Name="ProductionCost" Value="1296.693059887" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/03/2019 13:54:49" />
+        <StateValue Name="ProductionCost" Value="1302.06211299937" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order02</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/05/2019 16:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="248.31630666666666" PlanStatus="Late" UpperBound="80" PlanBounds="AboveBounds" InteractiveValue="247.16833083333333" InteractiveStatus="Late" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999982" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2699.1200380731361" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/12/2019 15:10:05" />
+        <StateValue Name="ProductionCost" Value="2699.12003807314" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/12/2019 16:18:58" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order03</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/07/2019 16:00:00</Property>
+      <Property Name="OrderStatus">WIP</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="8.3093597222222222" PlanStatus="OnTime" UpperBound="128" PlanBounds="WithinBounds" InteractiveValue="8.5962358333333331" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="1212.0911178859269" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="1220.880006509856" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/02/2019 16:35:46" />
+        <StateValue Name="ProductionCost" Value="1220.88000650986" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/02/2019 16:18:33" />
+        <StateValue Name="ProductionCost" Value="1212.09111788593" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order04</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/05/2019 16:00:00</Property>
+      <Property Name="OrderStatus">WIP</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="27.407089722222221" PlanStatus="OnTime" UpperBound="80" PlanBounds="WithinBounds" InteractiveValue="27.028317777777776" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="1346" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="1332.691394609318" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/03/2019 11:01:41" />
+        <StateValue Name="ProductionCost" Value="1332.69139460932" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/03/2019 11:24:25" />
+        <StateValue Name="ProductionCost" Value="1346" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order05</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/06/2019 16:00:00</Property>
+      <Property Name="OrderStatus">WIP</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="49.314531666666667" PlanStatus="OnTime" UpperBound="104" PlanBounds="WithinBounds" InteractiveValue="48.530524166666666" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="1430" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="1441.2825235967427" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 08:31:49" />
+        <StateValue Name="ProductionCost" Value="1441.28252359674" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 09:18:52" />
+        <StateValue Name="ProductionCost" Value="1430" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order06</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/03/2019 16:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="55.509248611111111" PlanStatus="Late" UpperBound="32" PlanBounds="AboveBounds" InteractiveValue="73.533506388888881" InteractiveStatus="Late" />
+      <TargetResult TargetName="TargetCost" PlanValue="2704" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2709.707805238143" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/05/2019 09:32:00" />
+        <StateValue Name="ProductionCost" Value="2709.70780523814" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 15:30:33" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order07</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/03/2019 16:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="79.809073888888889" PlanStatus="Late" UpperBound="32" PlanBounds="AboveBounds" InteractiveValue="79.076602777777779" InteractiveStatus="Late" />
+      <TargetResult TargetName="TargetCost" PlanValue="2704" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2705.5240092726881" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/05/2019 15:04:35" />
+        <StateValue Name="ProductionCost" Value="2705.52400927269" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/05/2019 15:48:32" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order08</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/12/2019 23:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="248.41739805555554" PlanStatus="OnTime" UpperBound="255" PlanBounds="WithinBounds" InteractiveValue="248.5057711111111" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999982" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2711.2800343401404" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/12/2019 16:30:20" />
+        <StateValue Name="ProductionCost" Value="2711.28003434014" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/12/2019 16:25:02" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order09</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/14/2019 21:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="271.71741583333335" PlanStatus="OnTime" UpperBound="301" PlanBounds="WithinBounds" InteractiveValue="271.888125" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999977" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2606.5015490387468" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/13/2019 15:53:17" />
+        <StateValue Name="ProductionCost" Value="2606.50154903875" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/13/2019 15:43:02" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order10</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/13/2019 16:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="48.407585833333329" PlanStatus="OnTime" UpperBound="272" PlanBounds="WithinBounds" InteractiveValue="48.325019999999995" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="3114" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="3122.8223227333183" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 08:19:30" />
+        <StateValue Name="ProductionCost" Value="3122.82232273332" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 08:24:27" />
+        <StateValue Name="ProductionCost" Value="3114" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order11</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/14/2019 14:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="54.40808194444444" PlanStatus="OnTime" UpperBound="294" PlanBounds="WithinBounds" InteractiveValue="54.276105277777773" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="3114" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="3100.8463764155895" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 14:16:33" />
+        <StateValue Name="ProductionCost" Value="3100.84637641559" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 14:24:29" />
+        <StateValue Name="ProductionCost" Value="3114" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order12</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="271.8179325" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="271.36459805555552" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999977" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2540.2597823147225" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/13/2019 15:21:52" />
+        <StateValue Name="ProductionCost" Value="2540.25978231472" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/13/2019 15:49:04" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order13</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/12/2019 00:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="101.91124527777778" PlanStatus="OnTime" UpperBound="232" PlanBounds="WithinBounds" InteractiveValue="99.001523888888883" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2704" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2698.5849575636971" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/06/2019 11:00:05" />
+        <StateValue Name="ProductionCost" Value="2698.5849575637" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/06/2019 13:54:40" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order14</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="343.118525" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="342.18709805555557" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999968" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2563.1239374376955" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/16/2019 14:11:13" />
+        <StateValue Name="ProductionCost" Value="2563.1239374377" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/16/2019 15:07:06" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order15</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/13/2019 22:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="168.51083833333334" PlanStatus="OnTime" UpperBound="278" PlanBounds="WithinBounds" InteractiveValue="168.3813336111111" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2703.9999999999995" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2698.9176006474695" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/09/2019 08:22:52" />
+        <StateValue Name="ProductionCost" Value="2698.91760064747" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/09/2019 08:30:39" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order16</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="74.408577777777779" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="54.460546944444445" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="3114" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="3091.2265800652485" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/04/2019 14:27:37" />
+        <StateValue Name="ProductionCost" Value="3091.22658006525" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/05/2019 10:24:30" />
+        <StateValue Name="ProductionCost" Value="3114" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order17</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="175.61179166666665" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="173.72617027777778" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2704" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2775.3428251561072" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/09/2019 13:43:34" />
+        <StateValue Name="ProductionCost" Value="2775.34282515611" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/09/2019 15:36:42" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order18</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/12/2019 23:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="343.21846666666664" PlanStatus="Late" UpperBound="255" PlanBounds="AboveBounds" InteractiveValue="342.20707416666664" InteractiveStatus="Late" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999973" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2536.7883909875045" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/16/2019 14:12:25" />
+        <StateValue Name="ProductionCost" Value="2536.7883909875" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/16/2019 15:13:06" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order19</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/14/2019 21:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="366.51963416666666" PlanStatus="Late" UpperBound="301" PlanBounds="AboveBounds" InteractiveValue="365.17773027777775" InteractiveStatus="Late" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999973" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2525.5458502893289" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/17/2019 13:10:39" />
+        <StateValue Name="ProductionCost" Value="2525.54585028933" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/17/2019 14:31:10" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order20</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/13/2019 16:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="75.509914166666661" PlanStatus="OnTime" UpperBound="272" PlanBounds="WithinBounds" InteractiveValue="73.82704249999999" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="3114" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="3099.8174996322218" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/05/2019 09:49:37" />
+        <StateValue Name="ProductionCost" Value="3099.81749963222" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/05/2019 11:30:35" />
+        <StateValue Name="ProductionCost" Value="3114" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order21</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/14/2019 14:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="96.510579722222218" PlanStatus="OnTime" UpperBound="294" PlanBounds="WithinBounds" InteractiveValue="79.300089722222225" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="3114" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="3106.9039034150951" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/05/2019 15:18:00" />
+        <StateValue Name="ProductionCost" Value="3106.9039034151" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/06/2019 08:30:38" />
+        <StateValue Name="ProductionCost" Value="3114" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order22</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="366.6190008333333" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="366.17525388888885" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999973" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2562.1854625081633" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/17/2019 14:10:30" />
+        <StateValue Name="ProductionCost" Value="2562.18546250816" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/17/2019 14:37:08" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order23</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/12/2019 00:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="175.5117897222222" PlanStatus="OnTime" UpperBound="232" PlanBounds="WithinBounds" InteractiveValue="174.5192425" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2703.9999999999991" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2689.8325734101177" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/09/2019 14:31:09" />
+        <StateValue Name="ProductionCost" Value="2689.83257341012" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/09/2019 15:30:42" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order24</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">2</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="389.92074333333329" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="387.09339361111108" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2567.9999999999973" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2561.3898111665776" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/18/2019 11:05:36" />
+        <StateValue Name="ProductionCost" Value="2561.38981116658" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/18/2019 13:55:14" />
+        <StateValue Name="ProductionCost" Value="2568" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order25</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/13/2019 22:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="197.51242499999998" PlanStatus="OnTime" UpperBound="278" PlanBounds="WithinBounds" InteractiveValue="195.86815194444443" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2703.9999999999991" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2713.8349558043005" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/10/2019 11:52:05" />
+        <StateValue Name="ProductionCost" Value="2713.8349558043" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/10/2019 13:30:44" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order26</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="99.80957" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="99.4716436111111" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="3114" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="3134.1281778176644" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/06/2019 11:28:17" />
+        <StateValue Name="ProductionCost" Value="3134.12817781766" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/06/2019 11:48:34" />
+        <StateValue Name="ProductionCost" Value="3114" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order27</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="ReleaseDate">12/01/2019 00:00:00</Property>
+      <Property Name="DueDate">12/19/2019 13:00:00</Property>
+      <Property Name="Priority">1</Property>
+      <Property Name="Quantity">10</Property>
+    </Properties>
+    <TargetResults>
+      <TargetResult TargetName="TargetShipDate" PlanValue="197.61256666666665" PlanStatus="OnTime" UpperBound="413" PlanBounds="WithinBounds" InteractiveValue="198.16566444444445" InteractiveStatus="OnTime" />
+      <TargetResult TargetName="TargetCost" PlanValue="2703.9999999999995" PlanStatus="OnBudget" UpperBound="100000" PlanBounds="WithinBounds" InteractiveValue="2733.0449014361034" InteractiveStatus="OnBudget" />
+    </TargetResults>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ShipDate" Value="12/10/2019 14:09:56" />
+        <StateValue Name="ProductionCost" Value="2733.0449014361" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ShipDate" Value="12/10/2019 13:36:45" />
+        <StateValue Name="ProductionCost" Value="2704" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+</Fragment>
+<!-- 1gndyJBzx7OXU1IEwvaLDXwkf00FDHJcEFUNdaR+1SxIwY55EO63lKu77Q7Uj0I4YaQHjlMEydzwmkbPVbOkRA== -->

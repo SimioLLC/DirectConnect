@@ -1,0 +1,247 @@
+<Fragment>
+  <Compatibility ParseElementFunctionsInExpressionsLast="True" ParseNonEntityAssociatedObjectForPropertyReference="False" AllowInteractiveEntryOfNonStandardElementNames="False" />
+  <Lists>
+    <StringList Name="FreeSpaceSteeringBehaviorType">
+      <Items>
+        <Item Value="DirectToDestination" />
+        <Item Value="FollowNetworkPathIfPossible" />
+      </Items>
+    </StringList>
+  </Lists>
+  <PropertyDefinitions>
+    <Categories>
+      <Category Name="Travel Logic" Description="Travel Logic" />
+      <Category Name="Routing Logic" Description="Routing Logic" />
+      <Category Name="Financials" Description="Financials" InitiallyExpanded="False" />
+      <Category Name="Population" Description="Population" InitiallyExpanded="False" />
+      <Category Name="Advanced Options" Description="Advanced Options" InitiallyExpanded="False" />
+    </Categories>
+    <ListProperty Name="FreeSpaceSteeringBehavior" DisplayName="Free Space Steering Behavior" Description="The behavior used to steer an entity of this type when traveling in free space to a destination.&#xD;&#xA;&#xD;&#xA;'Direct To Destination' will steer an entity in a straight line to its destination.&#xD;&#xA;&#xD;&#xA;'Follow Network Path If Possible' will prefer to steer an entity along a path following its currently assigned network, staying within the boundaries of the drawn path width. However, if no followable network path exists to the entity's destination then the entity will be steered in a straight line. Note: In order to use this steering behavior, make sure the entity's travel mode is set to 'Free Space Only'." ComplexityLevel="Advanced" Category="Travel Logic" DefaultValue="Direct To Destination" NullString="null" List="FreeSpaceSteeringBehaviorType">
+      <Captions>
+        <Caption Value="DirectToDestination" Display="Direct To Destination" />
+        <Caption Value="FollowNetworkPathIfPossible" Display="Follow Network Path If Possible" />
+      </Captions>
+    </ListProperty>
+    <ExpressionProperty Name="FreeSpaceSteeringUpdateInterval" DisplayName="Update Interval" Description="The time interval between steering adjustments to maintain adherence to the network path and avoid collisions." Category="Travel Logic" DefaultValue="0.1" Parent="FreeSpaceSteeringBehavior" NullString="null" UnitType="Time" DefaultUnits="Seconds">
+      <Switch Property="FreeSpaceSteeringBehavior" Value="FollowNetworkPathIfPossible" />
+    </ExpressionProperty>
+    <BooleanProperty Name="FreeSpaceSteeringAvoidCollisions" DisplayName="Avoid Collisions" Description="Indicates whether the steering behavior will attempt to avoid collisions with other entities that are following the same network path." Category="Travel Logic" DefaultValue="False" Parent="FreeSpaceSteeringBehavior" NullString="null">
+      <Switch Property="FreeSpaceSteeringBehavior" Value="FollowNetworkPathIfPossible" />
+    </BooleanProperty>
+    <Overrides>
+      <Override Name="ReportStatistics" DefaultValue="True" />
+      <Override Name="InitialCost" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="InitialCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceIdleCostRate" Visible="False" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceCostPerUse" Visible="False" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="ResourceUsageCostRate" Visible="False" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="LogResourceUsage" Visible="False" DefaultValue="False" />
+      <Override Name="DisplayName" DefaultValue="ManufacturingOrders.OrderId" />
+      <Override Name="DisplayCategory" Visible="False" />
+      <Override Name="DisplayColor" Visible="False" />
+      <Override Name="IncludeInPlanResourceConstraints" Visible="False" DefaultValue="True" />
+      <Override Name="CapacityType" Visible="False" DefaultValue="Fixed" />
+      <Override Name="WorkSchedule" Visible="False" />
+      <Override Name="WorkDayExceptions" Visible="False" DefaultValue="0 Rows" />
+      <Override Name="WorkPeriodExceptions" Visible="False" DefaultValue="0 Rows" />
+      <Override Name="InitialCapacity" Visible="False" DefaultValue="1" />
+      <Override Name="RankingRule" Visible="False" DefaultValue="First In First Out" />
+      <Override Name="RankingExpression" Visible="False" DefaultValue="0.0" />
+      <Override Name="DynamicSelectionRule" Visible="False" DefaultValue="None" />
+      <Override Name="CurrentSizeIndex" DefaultValue="ModelEntity.Picture" />
+      <Override Name="InitialDesiredSpeed" DefaultValue="1.4" DefaultUnitSubType="1" />
+      <Override Name="InitialNumberInSystem" DefaultValue="0" />
+      <Override Name="MaximumNumberInSystemLimit" DefaultValue="2500" />
+      <Override Name="Destroyable" DefaultValue="True" />
+      <Override Name="InitialTravelMode" DefaultValue="Network If Possible" />
+      <Override Name="InitialNetwork" DefaultValue="Global" />
+      <Override Name="NetworkTurnaroundMethod" DefaultValue="Exit &amp; Re-enter" />
+      <Override Name="InitialPriority" DefaultValue="ManufacturingOrders.Priority" />
+      <Override Name="CanTransferInAndOutOfObjects" DefaultValue="True" />
+      <Override Name="DueDateExpression" DefaultValue="ManufacturingOrders.DueDate" DefaultUnitSubType="0" />
+      <Override Name="GanttVisibilityExpression" DefaultValue="True" />
+    </Overrides>
+  </PropertyDefinitions>
+  <States>
+    <DiscreteState Name="Picture" Description="A utility state to hold a picture index. This state can then be referenced in an expression for Current Symbol Index." />
+    <StringState Name="Animation" Description="A utility state to hold the name of an animation. This state can then be referenced in an expression for Current Animation Index." />
+  </States>
+  <Events />
+  <Processes>
+    <Process Name="OnEnteredFreeSpace" IsOverride="True" ShowAsUserExecutableProcess="False" InterfaceProcessID="Entity.OnEnteredFreeSpace" BeginStepID="2" ExcludedFromLimits="True">
+      <Properties>
+        <Property Name="TokenClassName">FreeSpaceSteeringToken</Property>
+        <Property Name="TokenActionOnAssociatedObjectDestroyed">EndProcess</Property>
+        <Property Name="TokenActionOnAssociatedObjectTransferRequested">EndProcess</Property>
+      </Properties>
+      <Steps>
+        <Step Type="Assign" Name="OnEnteredFreeSpaceAssignments" ID="2">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>FreeSpaceSteeringToken.EnteredFreeSpaceFromNode</Value>
+            </Property>
+            <Property Name="NewValue">Math.If(PreviousNode != Nothing, DirectDistanceTo.Object(PreviousNode) == 0.0, False)</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="3" />
+        </Step>
+        <Step Type="Decide" Name="IfDestinationNode" ID="3">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">DestinationNode != Nothing</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="13" />
+          <Exit Name="False" Type="Alternate" NextID="4" />
+        </Step>
+        <Step Type="Decide" Name="IfEnteredFreeSpaceFromNode" ID="4">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">FreeSpaceSteeringToken.EnteredFreeSpaceFromNode</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="6" />
+          <Exit Name="False" Type="Alternate" NextID="5" />
+        </Step>
+        <Step Type="Assign" Name="MovementRate" ID="5">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>Movement.Rate</Value>
+            </Property>
+          </Properties>
+        </Step>
+        <Step Type="Assign" Name="GetNetworkPath" ID="6">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>FreeSpaceSteeringToken.NetworkPathNextLink</Value>
+            </Property>
+            <Property Name="NewValue">PreviousNode.OutboundLinks.SelectItemFor(Entity)</Property>
+            <Property Name="Assignments">
+              <Rows>
+                <Properties>
+                  <Property Name="AssignmentsStateVariableName">
+                    <Value>FreeSpaceSteeringToken.NetworkPathNextNode</Value>
+                  </Property>
+                  <Property Name="AssignmentsNewValue">Math.If(FreeSpaceSteeringToken.NetworkPathNextLink != Nothing, Math.If(PreviousNode == FreeSpaceSteeringToken.NetworkPathNextLink.StartingNode, FreeSpaceSteeringToken.NetworkPathNextLink.EndingNode, FreeSpaceSteeringToken.NetworkPathNextLink.StartingNode), Nothing)</Property>
+                </Properties>
+              </Rows>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="7" />
+        </Step>
+        <Step Type="Decide" Name="IfNetworkPath" ID="7">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">FreeSpaceSteeringToken.NetworkPathNextLink != Nothing</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="12" />
+          <Exit Name="False" Type="Alternate" NextID="8" />
+        </Step>
+        <Step Type="Decide" Name="IfNearestInputNode" ID="8">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">PreviousNode.Nearest.InputNode != Nothing</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="11" />
+          <Exit Name="False" Type="Alternate" NextID="9" />
+        </Step>
+        <Step Type="Decide" Name="IfNearestNode" ID="9">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">PreviousNode.Nearest.Node != Nothing</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="10" />
+          <Exit Name="False" Type="Alternate" NextID="5" />
+        </Step>
+        <Step Type="SetNode" Name="ToNearestNode" ID="10">
+          <Properties>
+            <Property Name="NodeName">PreviousNode.Nearest.Node</Property>
+            <Property Name="AutoClearIfVisitDifferentNode">True</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="13" />
+        </Step>
+        <Step Type="SetNode" Name="ToNearestInputNode" ID="11">
+          <Properties>
+            <Property Name="NodeName">PreviousNode.Nearest.InputNode</Property>
+            <Property Name="AutoClearIfVisitDifferentNode">True</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="13" />
+        </Step>
+        <Step Type="SetNode" Name="ToPathNextNode" ID="12">
+          <Properties>
+            <Property Name="NodeName">FreeSpaceSteeringToken.NetworkPathNextNode</Property>
+            <Property Name="AutoClearIfVisitDifferentNode">True</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="13" />
+        </Step>
+        <Step Type="Decide" Name="IfDirectToDestination" ID="13">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">Math.If(FreeSpaceSteeringBehavior == List.FreeSpaceSteeringBehaviorType.DirectToDestination || CurrentNetwork == Nothing || !FreeSpaceSteeringToken.EnteredFreeSpaceFromNode, True, !CurrentNetwork.PathExists(PreviousNode, DestinationNode))</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="15" />
+          <Exit Name="False" Type="Alternate" NextID="14" />
+        </Step>
+        <Step Type="Travel" Name="FollowNetworkPath" ID="14">
+          <Properties>
+            <Property Name="SteeringBehavior" BehaviorGuid="6cbbbd77-ba6d-45d1-bcc7-0ed1bbd08ae8">
+              <Value>Follow Network Path</Value>
+              <Properties>
+                <Property Name="NetworkName">
+                  <Value>CurrentNetwork</Value>
+                </Property>
+                <Property Name="StartingNode">PreviousNode</Property>
+                <Property Name="EndingNode">DestinationNode</Property>
+                <Property Name="UpdateTimeInterval">FreeSpaceSteeringUpdateInterval</Property>
+                <Property Name="AvoidCollisions">FreeSpaceSteeringAvoidCollisions</Property>
+              </Properties>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="16" />
+        </Step>
+        <Step Type="Travel" Name="DirectToDestination" ID="15">
+          <Properties>
+            <Property Name="SteeringBehavior" BehaviorGuid="2b2ac6d5-73de-4ac8-bfc8-8b0ea2fdbe1e">
+              <Value>Direct To Destination</Value>
+              <Properties>
+                <Property Name="DestinationObject">DestinationNode</Property>
+                <Property Name="MaximumMovementRate">DesiredSpeed</Property>
+              </Properties>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="16" />
+        </Step>
+        <Step Type="Transfer" Name="ToDestinationNode" ID="16">
+          <Properties>
+            <Property Name="NodeName">DestinationNode</Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+  </Processes>
+  <Tokens>
+    <Token Name="FreeSpaceSteeringToken">
+      <States>
+        <ElementReferenceState Name="NetworkPathNextLink" ElementType="Link" />
+        <ElementReferenceState Name="NetworkPathNextNode" ElementType="Node" />
+        <BooleanState Name="EnteredFreeSpaceFromNode" />
+      </States>
+    </Token>
+  </Tokens>
+  <External>
+    <Graphics>
+      <Polygon Center="0 0 0" Color="008000" YHeight="0.25" ExternallyVisible="True">
+        <Points>
+          <Point Location="-0.25 0 0.25" />
+          <Point Location="-0.25 0 -0.25" />
+          <Point Location="0.25 0 0" />
+        </Points>
+      </Polygon>
+      <DefaultFlowMaterial>
+        <MaterialRef Id="71d2cfcd-2e57-4be1-8c84-a0b1b72d9ed7" />
+      </DefaultFlowMaterial>
+      <OffsetDynamicRelativeToExternalBounds Value="False" />
+    </Graphics>
+  </External>
+  <Graphics>
+    <AnimationSetup MinimumNumberOfFramesToDisplayIdleAnimation="10" />
+  </Graphics>
+</Fragment>
+<!-- a8BPQZcLp15bBfI6meD4pSeXk9Q/QeMjDTVgUtbHJbxpU4bF8nXUW4IoRDdZ8d5j6OqnasGAfrCVAq/nLRqXkg== -->

@@ -468,10 +468,7 @@ namespace DirectConnect
                     dt.Columns.Add(pi.Name, validType);
                 }
 
-                // If needed, find the method the fetches the value for the custom columns using the DisplayName
-                // We'll use it below as we invoke it for each custom column in each record.
-                MethodInfo GetCustomValueMethod = null;
-
+                // If needed, create columns for any custom expressions for the log
                 if (runtimeLog.RuntimeLogExpressions != null)
                 {
                     marker = $"Creating DataTable colums for custom log expressions";
@@ -480,7 +477,7 @@ namespace DirectConnect
                     {
                         var dataFormat = logExpression.DataFormat; // Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
                         Type columnType;
-                        switch ( dataFormat )
+                        switch (dataFormat)
                         {
                             case ExpressionDataFormat.Real:
                                 {
@@ -522,31 +519,11 @@ namespace DirectConnect
                                 columnType = typeof(string);
                                 break;
                         }
-                        //Type validType = GetValidClrType(propertyType);
+
                         Type validType = GetValidClrType(columnType);
                         dt.Columns.Add(logExpression.DisplayName, validType);
                     }
-
-                    // If we have any runtimelogExpressions, then create a reference
-                    // it the GetCustomColumnValue method, which we'll use when create a datarow.
-                    if (runtimeLog.RuntimeLogExpressions.Any())
-                    {
-                        marker = "Getting Method to retrieve value for log expressions";
-                        foreach (MethodInfo mi in typeof(T).GetMethods())
-                        {
-                            if (mi.Name == "GetCustomColumnValue")
-                            {
-                                ParameterInfo[] parameters = mi.GetParameters();
-                                if (parameters.Length == 1)
-                                {
-                                    GetCustomValueMethod = mi;
-                                    goto DoneLookingForMethod;
-                                }
-                            }
-                        DoneLookingForMethod:;
-                        }
-                    } // Do we have any custom columns?
-                } // Check if we have access to RuntimeLogRecords
+                }
 
                 int recordCount = 0;
                 // Create a DataRow (and add it to the DataTable) from:
@@ -584,7 +561,7 @@ namespace DirectConnect
 
                         try
                         {
-                            object fieldValue = GetCustomValueMethod?.Invoke(record, new object[] { expressionName });
+                            object fieldValue = record.GetLogExpressionValue(expressionName);
 
                             fieldValue = FixValueForDatabase(fieldValue);
                             dr[expressionName] = fieldValue;
@@ -614,7 +591,7 @@ namespace DirectConnect
         /// 1. Null is replaced with DBNull
         /// 2. Floating points with NaN are replaced with DBNull.
         /// 3. DateTimes that are Min or Max valued are replaced with DBNull.
-        /// 4. Floating points with Infinity are replaced with MAX SQL value
+        /// 4. Floating points with +/- Infinity are replaced with MAX/MIN SQL value
         /// </summary>
         /// <param name="fieldValue"></param>
         /// <returns></returns>
@@ -1105,7 +1082,8 @@ namespace DirectConnect
 
 
         /// <summary>
-        /// Select a SQL type given a CLR type
+        /// Select a SQL type given a CLR type.
+        /// Employs the ClrToSqlList. Anything not matching returns NVARCHAR(MAX)
         /// </summary>
         /// <param name="clrType"></param>
         /// <returns></returns>
@@ -1774,7 +1752,7 @@ namespace DirectConnect
 
         /// <summary>
         /// Return the SQL column type of a Simio table column.
-        /// There are more types, but we are only dealing with real, int, datetime, and bit.
+        /// There are more types, but we are only dealing with float, int, datetime, and bit.
         /// Anything else is nvarchar(1000)
         /// </summary>
         /// <param name="col"></param>
@@ -1799,7 +1777,7 @@ namespace DirectConnect
         }
 
         /// <summary>
-        /// Return the SQL type for the State type.
+        /// Return the SQL type for the Simio State type.
         /// Only simple types (real, int, datetime, bit) are converted,
         /// and anything else is set the nvarchar(1000)
         /// </summary>

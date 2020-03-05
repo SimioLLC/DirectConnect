@@ -1,0 +1,51 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Cut</Property>
+      <Property Name="Node">Input@Cut1</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Cut</Property>
+      <Property Name="Node">Input@Cut2</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Shape</Property>
+      <Property Name="Node">Input@Shape1</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Shape</Property>
+      <Property Name="Node">Input@Shape2</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Weld</Property>
+      <Property Name="Node">Input@Weld1</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Weld</Property>
+      <Property Name="Node">Input@Weld2</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Finish</Property>
+      <Property Name="Node">Input@Finish1</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Finish</Property>
+      <Property Name="Node">Input@Finish2</Property>
+    </Properties>
+  </Row>
+</Fragment>
+<!-- F7I23TK+Q5yKIwvSf8XxbKBbB48+uadSE+QJlIdhOPt4zF4x3WmTk/XmGgJvvvonMKUMUTpYtt75toicXtPK7g== -->

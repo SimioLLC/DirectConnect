@@ -1,0 +1,305 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Cut</Property>
+      <Property Name="Description">Cut</Property>
+      <Property Name="XLocation">-8</Property>
+      <Property Name="ZLocation">5</Property>
+      <Property Name="ObjectType">SchedTransferNode</Property>
+      <Property Name="CostRate" Units="USD per Hour">0</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Cut1</Property>
+      <Property Name="Description">Cut1</Property>
+      <Property Name="DisplayCategory">Cut</Property>
+      <Property Name="XLocation">-4</Property>
+      <Property Name="ZLocation">2</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+      <Property Name="ChangeoverMatrix">MaterialColorMatrix</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Cut2</Property>
+      <Property Name="Description">Cut2</Property>
+      <Property Name="DisplayCategory">Cut</Property>
+      <Property Name="XLocation">-4</Property>
+      <Property Name="ZLocation">7</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+      <Property Name="ChangeoverMatrix">MaterialColorMatrix</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Shape</Property>
+      <Property Name="Description">Shape</Property>
+      <Property Name="XLocation">5</Property>
+      <Property Name="ZLocation">-1</Property>
+      <Property Name="ObjectType">SchedTransferNode</Property>
+      <Property Name="CostRate" Units="USD per Hour">0</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Shape1</Property>
+      <Property Name="Description">Shape1</Property>
+      <Property Name="DisplayCategory">Shape</Property>
+      <Property Name="XLocation">1</Property>
+      <Property Name="ZLocation">-2</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Shape2</Property>
+      <Property Name="Description">Shape2</Property>
+      <Property Name="DisplayCategory">Shape</Property>
+      <Property Name="XLocation">9</Property>
+      <Property Name="ZLocation">-2</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Weld</Property>
+      <Property Name="Description">Weld</Property>
+      <Property Name="XLocation">5</Property>
+      <Property Name="ZLocation">11</Property>
+      <Property Name="ObjectType">SchedTransferNode</Property>
+      <Property Name="CostRate" Units="USD per Hour">0</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Weld1</Property>
+      <Property Name="Description">Weld1</Property>
+      <Property Name="DisplayCategory">Weld</Property>
+      <Property Name="XLocation">1</Property>
+      <Property Name="ZLocation">12</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+      <Property Name="SecondaryResourceName">Worker1</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Weld2</Property>
+      <Property Name="Description">Weld2</Property>
+      <Property Name="DisplayCategory">Weld</Property>
+      <Property Name="XLocation">9</Property>
+      <Property Name="ZLocation">12</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+      <Property Name="SecondaryResourceName">Worker2</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Finish</Property>
+      <Property Name="Description">Finish</Property>
+      <Property Name="XLocation">12</Property>
+      <Property Name="ZLocation">5</Property>
+      <Property Name="ObjectType">SchedTransferNode</Property>
+      <Property Name="CostRate" Units="USD per Hour">0</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Finish1</Property>
+      <Property Name="Description">Finish1</Property>
+      <Property Name="DisplayCategory">Finish</Property>
+      <Property Name="XLocation">15</Property>
+      <Property Name="ZLocation">2</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Finish2</Property>
+      <Property Name="Description">Finish2</Property>
+      <Property Name="DisplayCategory">Finish</Property>
+      <Property Name="XLocation">15</Property>
+      <Property Name="ZLocation">7</Property>
+      <Property Name="ObjectType">SchedServer</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">MoArrivals</Property>
+      <Property Name="Description">MoArrivals</Property>
+      <Property Name="XLocation">-14</Property>
+      <Property Name="ZLocation">5</Property>
+      <Property Name="ObjectType">SchedSource</Property>
+      <Property Name="CostRate" Units="USD per Hour">0</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Worker1</Property>
+      <Property Name="Description">Worker1</Property>
+      <Property Name="DisplayCategory">Workers</Property>
+      <Property Name="XLocation">-14</Property>
+      <Property Name="ZLocation">-3</Property>
+      <Property Name="ObjectType">SchedWorker</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Worker2</Property>
+      <Property Name="Description">Worker2</Property>
+      <Property Name="DisplayCategory">Workers</Property>
+      <Property Name="XLocation">-14</Property>
+      <Property Name="ZLocation">1</Property>
+      <Property Name="ObjectType">SchedWorker</Property>
+      <Property Name="CostRate" Units="USD per Hour">20</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="ResourceName">Ship</Property>
+      <Property Name="Description">Ship</Property>
+      <Property Name="XLocation">20</Property>
+      <Property Name="ZLocation">5</Property>
+      <Property Name="ObjectType">SchedSink</Property>
+      <Property Name="CostRate" Units="USD per Hour">0</Property>
+    </Properties>
+    <StateResults>
+      <InteractiveValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </InteractiveValues>
+      <PlanValues>
+        <StateValue Name="ChangeoverEfficiency" Value="1" />
+      </PlanValues>
+    </StateResults>
+  </Row>
+</Fragment>
+<!-- U9/uMYnGIjDtrno1672nO9NrUtNyHkgjGnMvjM3UAFO/9BFH+ehns+S0wXlxRqROAat0i+astRBZ0LUvO1adNQ== -->

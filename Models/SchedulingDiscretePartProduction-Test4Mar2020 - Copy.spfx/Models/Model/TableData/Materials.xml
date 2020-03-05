@@ -1,0 +1,76 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="MaterialName">
+        <Value>FinishedGoodA</Value>
+      </Property>
+      <Property Name="DisplayCategory">Materials\Finished Goods</Property>
+      <Property Name="MaterialClass">Finished Goods</Property>
+      <Property Name="MaterialCost" Units="USD">0.0</Property>
+      <Property Name="MaterialColor">Green</Property>
+      <Property Name="GanttColor">LimeGreen</Property>
+      <Property Name="MaterialStateStatistic">
+        <Value>FinishedGoodASS</Value>
+      </Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="MaterialName">
+        <Value>FinishedGoodB</Value>
+      </Property>
+      <Property Name="DisplayCategory">Materials\Finished Goods</Property>
+      <Property Name="MaterialClass">Finished Goods</Property>
+      <Property Name="MaterialCost" Units="USD">0.0</Property>
+      <Property Name="MaterialColor">Red</Property>
+      <Property Name="GanttColor">Tomato</Property>
+      <Property Name="MaterialStateStatistic">
+        <Value>FinishedGoodBSS</Value>
+      </Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="MaterialName">
+        <Value>FinishedGoodC</Value>
+      </Property>
+      <Property Name="DisplayCategory">Materials\Finished Goods</Property>
+      <Property Name="MaterialClass">Finished Goods</Property>
+      <Property Name="MaterialCost" Units="USD">0.0</Property>
+      <Property Name="MaterialColor">Blue</Property>
+      <Property Name="GanttColor">DeepSkyBlue</Property>
+      <Property Name="MaterialStateStatistic">
+        <Value>FinishedGoodCSS</Value>
+      </Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="MaterialName">
+        <Value>MaterialX</Value>
+      </Property>
+      <Property Name="DisplayCategory">Materials\Raw Materials</Property>
+      <Property Name="MaterialClass">Raw Materials</Property>
+      <Property Name="MaterialCost" Units="USD">60</Property>
+      <Property Name="GanttColor">Orange</Property>
+      <Property Name="MaterialStateStatistic">
+        <Value>MaterialXSS</Value>
+      </Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="MaterialName">
+        <Value>MaterialY</Value>
+      </Property>
+      <Property Name="DisplayCategory">Materials\Raw Materials</Property>
+      <Property Name="MaterialClass">Raw Materials</Property>
+      <Property Name="MaterialCost" Units="USD">80</Property>
+      <Property Name="GanttColor">Purple</Property>
+      <Property Name="MaterialStateStatistic">
+        <Value>MaterialYSS</Value>
+      </Property>
+    </Properties>
+  </Row>
+</Fragment>
+<!-- HNldZwo+4E6CzeObeteqwkZPdekv/CGw0iP3L68hAEynbbJA/HFgf5tmy/ZqO7eTGk7lO62eEKuuCOYM1zTrxA== -->

@@ -1,0 +1,120 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_10</Property>
+      <Property Name="Sequence">Cut</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="SetupTime">3</Property>
+      <Property Name="ProcessTime">0.4</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_20</Property>
+      <Property Name="Sequence">Weld</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="RouteNumber">20</Property>
+      <Property Name="ProcessTime">0.7</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_30</Property>
+      <Property Name="Sequence">Shape</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="RouteNumber">30</Property>
+      <Property Name="ProcessTime">0.44</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_40</Property>
+      <Property Name="Sequence">Finish</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="RouteNumber">40</Property>
+      <Property Name="ProcessTime">0.4</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_50</Property>
+      <Property Name="Sequence">Ship</Property>
+      <Property Name="MaterialName">FinishedGoodA</Property>
+      <Property Name="RouteNumber">50</Property>
+      <Property Name="ProcessTime">0.0</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodB_10</Property>
+      <Property Name="Sequence">Cut</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="SetupTime">3</Property>
+      <Property Name="ProcessTime">0.35</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodB_20</Property>
+      <Property Name="Sequence">Weld</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="RouteNumber">20</Property>
+      <Property Name="ProcessTime">0.3</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodB_30</Property>
+      <Property Name="Sequence">Finish</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="RouteNumber">30</Property>
+      <Property Name="ProcessTime">0.46</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodB_40</Property>
+      <Property Name="Sequence">Ship</Property>
+      <Property Name="MaterialName">FinishedGoodB</Property>
+      <Property Name="RouteNumber">40</Property>
+      <Property Name="ProcessTime">0.0</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodC_10</Property>
+      <Property Name="Sequence">Cut</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="SetupTime">3</Property>
+      <Property Name="ProcessTime">0.56</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodC_20</Property>
+      <Property Name="Sequence">Shape</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="RouteNumber">20</Property>
+      <Property Name="ProcessTime">0.44</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodC_30</Property>
+      <Property Name="Sequence">Finish</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="RouteNumber">30</Property>
+      <Property Name="ProcessTime">0.4</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodC_40</Property>
+      <Property Name="Sequence">Ship</Property>
+      <Property Name="MaterialName">FinishedGoodC</Property>
+      <Property Name="RouteNumber">40</Property>
+      <Property Name="ProcessTime">0.0</Property>
+    </Properties>
+  </Row>
+</Fragment>
+<!-- iKaR6kRghEaLL4jorVbODd/MlqAuFGMc8trYop5n31hbQih3tRFMh9CyBJ/biScBN8IMldgRKhD949qymouJyw== -->

@@ -1,0 +1,78 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_10</Property>
+      <Property Name="ComponentMaterial">
+        <Value>MaterialX</Value>
+      </Property>
+      <Property Name="RequiredQuantity">2</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_10</Property>
+      <Property Name="ComponentMaterial">
+        <Value>MaterialY</Value>
+      </Property>
+      <Property Name="RequiredQuantity">1</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodA_40</Property>
+      <Property Name="ComponentMaterial">
+        <Value>FinishedGoodA</Value>
+      </Property>
+      <Property Name="RequiredQuantity">1</Property>
+      <Property Name="MaterialUse">Produce</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodB_10</Property>
+      <Property Name="ComponentMaterial">
+        <Value>MaterialX</Value>
+      </Property>
+      <Property Name="RequiredQuantity">2</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodB_10</Property>
+      <Property Name="ComponentMaterial">
+        <Value>MaterialY</Value>
+      </Property>
+      <Property Name="RequiredQuantity">2</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodB_30</Property>
+      <Property Name="ComponentMaterial">
+        <Value>FinishedGoodB</Value>
+      </Property>
+      <Property Name="RequiredQuantity">1</Property>
+      <Property Name="MaterialUse">Produce</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodC_10</Property>
+      <Property Name="ComponentMaterial">
+        <Value>MaterialY</Value>
+      </Property>
+      <Property Name="RequiredQuantity">3</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="RoutingKey">FinishedGoodC_30</Property>
+      <Property Name="ComponentMaterial">
+        <Value>FinishedGoodC</Value>
+      </Property>
+      <Property Name="RequiredQuantity">1</Property>
+      <Property Name="MaterialUse">Produce</Property>
+    </Properties>
+  </Row>
+</Fragment>
+<!-- uKZuv+ce1FtpAb610fGGjxZq88i0tft4UfnIeoWFaBIr2vCVKij0cE087KfMq9tR1KuyGICKSs/+0XXgTXcJPQ== -->

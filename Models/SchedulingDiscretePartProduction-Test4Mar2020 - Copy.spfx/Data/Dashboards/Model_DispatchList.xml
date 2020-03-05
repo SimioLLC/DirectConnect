@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <ObjectDataSource ComponentName="dataSource5">
+      <Name>Resource State Log</Name>
+      <DataSource Type="A.cab0e27e9dab14dcd2866c314cb2331f2, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dataSource6">
+      <Name>Resource Usage Log</Name>
+      <DataSource Type="A.ce7cf08ebdccde296c95d67642b55a620, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource1">
+      <Name>Constraint Log</Name>
+      <DataSource Type="A.cabecf017e18e48c369b3f8f1f3a104d8, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource2">
+      <Name>Interactive Results</Name>
+      <DataSource Type="System.ComponentModel.BindingList`1[[A.c2385c1144555641977c9a7b43cc8628d, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null]], System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource3">
+      <Name>Material Usage Log</Name>
+      <DataSource Type="A.cad5d8e9f81dec3e08f1550e2cce805ef, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource4">
+      <Name>Resource Capacity Log</Name>
+      <DataSource Type="A.c16649015ab0fc3b466c1350b10164b6a, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource5">
+      <Name>State Observation Log</Name>
+      <DataSource Type="A.c5e600294aabac61e01a321a1862907ea, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource6">
+      <Name>Table.BillOfMaterials</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource7">
+      <Name>Table.FreezeListRequirements</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource8">
+      <Name>Table.FreezeRoutingDependencies</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource9">
+      <Name>Table.FutureRoutingGroupEvents</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource10">
+      <Name>Table.ManufacturingOrders</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource11">
+      <Name>Table.ManufacturingOrdersOutput</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource12">
+      <Name>Table.MaterialLots</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource13">
+      <Name>Table.Materials</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource14">
+      <Name>Table.PublishedSchedule</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource15">
+      <Name>Table.ResourceReservations</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource16">
+      <Name>Table.Resources</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource17">
+      <Name>Table.RoutingGroupEvents</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource18">
+      <Name>Table.Routings</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource19">
+      <Name>Table.RoutingSecondaryWorkers</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource20">
+      <Name>Table.WorkInProcess</Name>
+      <DataSource Type="A.c5fda338c0f625a614114fcded5da2659, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource21">
+      <Name>Tally Observation Log</Name>
+      <DataSource Type="A.c9011eac6e60a3b7eec31ce99636c4d5c, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource22">
+      <Name>Task Log</Name>
+      <DataSource Type="A.c8704782960ba7704f1f9586ac34119f0, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource23">
+      <Name>Task State Log</Name>
+      <DataSource Type="A.c4fd77bb4a20519b95e86684a58effafe, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource ComponentName="dashboardObjectDataSource24">
+      <Name>Transporter Usage Log</Name>
+      <DataSource Type="A.c26268c591487df3e80534f0d989210bd, Simio, Version=10.172.16785.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Operations" DataSource="dataSource6" FilterString="Not Contains([DataItem0], 'ForkLift[1]')">
+      <DataItems>
+        <Dimension DataMember="ResourceName" DefaultId="DataItem0" />
+        <Dimension DataMember="StartTime" DateTimeGroupInterval="DateHourMinute" DefaultId="DataItem1" />
+        <Dimension DataMember="EndTime" DateTimeGroupInterval="DateHourMinute" DefaultId="DataItem2" />
+        <Dimension DataMember="EntityName" DefaultId="DataItem4" />
+        <Measure DataMember="Duration" DefaultId="DataItem5" />
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem1" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem2" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem4" />
+        </GridDimensionColumn>
+        <GridMeasureColumn>
+          <Measure DefaultId="DataItem5" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+    <Pie ComponentName="pieDashboardItem1" Name="Resource States" DataSource="dataSource5" FilterString="Not Contains([DataItem0], 'ForkLift[1]')">
+      <DataItems>
+        <Dimension DataMember="ResourceName" DefaultId="DataItem0" />
+        <Dimension DataMember="StateName" DefaultId="DataItem1" />
+        <Measure DataMember="Duration" Name="Duration (Minutes) (Sum)" DefaultId="DataItem2" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem0" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Values>
+        <Value DefaultId="DataItem2" />
+      </Values>
+    </Pie>
+    <Card ComponentName="cardDashboardItem2" Name="Resource" DataSource="dataSource6" FilterString="Not Contains([DataItem1], 'ForkLift[1]')" IsMasterFilterCrossDataSource="true">
+      <InteractivityOptions MasterFilterMode="Multiple" />
+      <DataItems>
+        <Measure DataMember="Duration" DefaultId="DataItem0" />
+        <Dimension DataMember="ResourceName" DefaultId="DataItem1" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem1" />
+      </SeriesDimensions>
+      <Card>
+        <ActualValue DefaultId="DataItem0" />
+        <AbsoluteVariationNumericFormat />
+        <PercentVariationNumericFormat />
+        <PercentOfTargetNumericFormat />
+        <LayoutTemplate MinWidth="140" Type="Compact">
+          <MainValue Visible="true" ValueType="Title" DimensionIndex="0" />
+          <SubValue Visible="false" ValueType="Subtitle" DimensionIndex="0" />
+          <BottomValue Visible="false" ValueType="ActualValue" DimensionIndex="0" />
+          <BottomSubValue1 Visible="false" ValueType="AbsoluteVariation" DimensionIndex="0" />
+          <BottomSubValue2 Visible="false" ValueType="PercentVariation" DimensionIndex="0" />
+          <DeltaIndicator Visible="false" />
+          <Sparkline Visible="false" />
+        </LayoutTemplate>
+      </Card>
+    </Card>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Weight="50">
+        <LayoutItem DashboardItem="cardDashboardItem2" Weight="47.814391392064557" />
+        <LayoutItem DashboardItem="pieDashboardItem1" Weight="52.185608607935443" />
+      </LayoutGroup>
+      <LayoutItem DashboardItem="gridDashboardItem1" Weight="50" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

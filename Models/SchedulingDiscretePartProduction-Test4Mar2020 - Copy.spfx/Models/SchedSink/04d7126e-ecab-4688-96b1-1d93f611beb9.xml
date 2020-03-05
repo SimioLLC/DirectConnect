@@ -1,0 +1,129 @@
+<Fragment>
+  <Compatibility ParseElementFunctionsInExpressionsLast="True" ParseNonEntityAssociatedObjectForPropertyReference="False" AllowInteractiveEntryOfNonStandardElementNames="False" />
+  <PropertyDefinitions>
+    <Categories>
+      <Category Name="Process Logic" Description="Process Logic" />
+      <Category Name="State Assignments" Description="Optional State Assignments" InitiallyExpanded="False" />
+      <Category Name="Financials" Description="Financials" InitiallyExpanded="False" />
+      <Category Name="Financials/Buffer Costs" Description="Buffer Costs" InitiallyExpanded="False" />
+      <Category Name="Add-On Process Triggers" Description="Add-On Process Triggers" InitiallyExpanded="False" />
+      <Category Name="Advanced Options" Description="Advanced Options" InitiallyExpanded="False" />
+    </Categories>
+    <Overrides>
+      <Override Name="ReportStatistics" DefaultValue="True" />
+      <Override Name="InitialCost" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="InitialCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceIdleCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceCostPerUse" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="ResourceUsageCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="LogResourceUsage" DefaultValue="False" />
+      <Override Name="IncludeInPlanResourceConstraints" DefaultValue="True" />
+      <Override Name="CapacityType" DefaultValue="Fixed" />
+      <Override Name="WorkDayExceptions" DefaultValue="0 Rows" />
+      <Override Name="WorkPeriodExceptions" DefaultValue="0 Rows" />
+      <Override Name="InitialCapacity" DefaultValue="1" />
+      <Override Name="RankingRule" DefaultValue="First In First Out" />
+      <Override Name="RankingExpression" DefaultValue="0.0" />
+      <Override Name="DynamicSelectionRule" DefaultValue="None" />
+      <Override Name="TransferInConstraintsType" DefaultValue="Default" />
+      <Override Name="TransferOutConstraintsType" DefaultValue="Default" />
+      <Override Name="ExpectedSetupTimeExpression" DefaultValue="0.0" DefaultUnitSubType="0" />
+      <Override Name="ExpectedOperationTimeExpression" DefaultValue="0.0" DefaultUnitSubType="0" />
+      <Override Name="TransferInTime" DefaultValue="0.0" DefaultUnitSubType="1" />
+      <Override Name="AssignmentsOnEntering" DefaultValue="2 Rows">
+        <DefaultTuples>
+          <DefaultTuple>
+            <DefaultTupleEntry Name="AssignmentsOnEnteringStateVariableName" Value="ManufacturingOrders.ShipDate" />
+            <DefaultTupleEntry Name="AssignmentsOnEnteringNewValue" Value="TimeNow" />
+            <DefaultTupleEntry Name="AssignmentsOnEnteringNewValue.Units" Value="Hours" />
+          </DefaultTuple>
+          <DefaultTuple>
+            <DefaultTupleEntry Name="AssignmentsOnEnteringStateVariableName" Value="ManufacturingOrders.ProductionCost" />
+            <DefaultTupleEntry Name="AssignmentsOnEnteringNewValue" Value="Entity.Cost" />
+            <DefaultTupleEntry Name="AssignmentsOnEnteringNewValue.Units" Value="USD" />
+          </DefaultTuple>
+        </DefaultTuples>
+      </Override>
+      <Override Name="CapitalCost" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="InputBufferCostPerUse" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="InputBufferHoldingCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="LogTimeInSystemObservations" DefaultValue="False" />
+    </Overrides>
+  </PropertyDefinitions>
+  <States />
+  <Events />
+  <Elements />
+  <Processes />
+  <External>
+    <TransferPoints />
+    <TransferPointInitialValuesOverrides>
+      <TransferPointInitialValuesOverride Name="Input">
+        <InitialValues>
+          <InitialValue Name="ReportStatistics" Value="False" />
+          <InitialValue Name="ParentCostCenter" />
+          <InitialValue Name="InitialCost" Value="0.0" />
+          <InitialValue Name="InitialCostRate" Value="0.0" />
+          <InitialValue Name="ResourceIdleCostRate" Value="0.0" />
+          <InitialValue Name="ResourceCostPerUse" Value="0.0" />
+          <InitialValue Name="ResourceUsageCostRate" Value="0.0" />
+          <InitialValue Name="LogResourceUsage" Value="False" />
+          <InitialValue Name="DisplayName" />
+          <InitialValue Name="DisplayCategory" />
+          <InitialValue Name="DisplayColor" />
+          <InitialValue Name="IncludeInPlanResourceConstraints" Value="True" />
+          <InitialValue Name="CapacityType" Value="Fixed" />
+          <InitialValue Name="WorkSchedule" />
+          <InitialValue Name="WorkDayExceptions" Value="0 Rows" />
+          <InitialValue Name="WorkPeriodExceptions" Value="0 Rows" />
+          <InitialValue Name="InitialCapacity" Value="1" />
+          <InitialValue Name="RankingRule" Value="First In First Out" />
+          <InitialValue Name="RankingExpression" Value="0.0" />
+          <InitialValue Name="DynamicSelectionRule" Value="None" />
+          <InitialValue Name="CurrentSizeIndex" />
+          <InitialValue Name="TransferInConstraintsType" Value="Default" />
+          <InitialValue Name="TransferInCondition" />
+          <InitialValue Name="TransferOutConstraintsType" Value="Default" />
+          <InitialValue Name="TransferOutCondition" />
+          <InitialValue Name="ExpectedSetupTimeExpression" Value="0.0" />
+          <InitialValue Name="ExpectedOperationTimeExpression" Value="0.0" />
+          <InitialValue Name="InitialTravelerCapacity" Value="Infinity" />
+          <InitialValue Name="EntryRankingRule" Value="First In First Out" />
+          <InitialValue Name="EntryRankingExpression" Value="Entity.Priority" />
+          <InitialValue Name="EntryExemptionCondition" />
+          <InitialValue Name="OutputFlowControlMode" Value="Single Flow (No Splitting)" />
+          <InitialValue Name="FlowSplitAllocationRule" Value="Evenly If Possible" />
+          <InitialValue Name="OutboundTravelMode" Value="Continue" />
+          <InitialValue Name="OutboundLinkPreference" Value="Any" />
+          <InitialValue Name="OutboundLinkRule" Value="Shortest Path" />
+          <InitialValue Name="OutboundLinkName" />
+          <InitialValue Name="OutboundLinkRandomNumberStream" Value="0" />
+          <InitialValue Name="SequenceExpectedOperationTime" Value="0.0" />
+          <InitialValue Name="AssignmentsOnEntering" Value="0 Rows" />
+          <InitialValue Name="TalliesOnEntering" Value="0 Rows" />
+          <InitialValue Name="TalliesOnExited" Value="0 Rows" />
+          <InitialValue Name="RunInitializedAddOnProcess" />
+          <InitialValue Name="RunEndingAddOnProcess" />
+          <InitialValue Name="EnteredAddOnProcess" />
+          <InitialValue Name="ExitedAddOnProcess" />
+          <InitialValue Name="BoundExternalOutputNode" />
+        </InitialValues>
+      </TransferPointInitialValuesOverride>
+    </TransferPointInitialValuesOverrides>
+    <Graphics>
+      <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+        <SymbolRef Id="f5b0a0b7-4274-403c-981c-33d4b6e077a5" />
+      </SymbolInstance>
+      <Queue Queue="InputBuffer.Contents" ExternallyVisible="True">
+        <Points>
+          <Point Location="-1 0 0.5" />
+          <Point Location="-4 0 0.5" />
+        </Points>
+      </Queue>
+      <OffsetDynamicRelativeToExternalBounds Value="False" />
+    </Graphics>
+  </External>
+  <Graphics>
+    <AnimationSetup MinimumNumberOfFramesToDisplayIdleAnimation="10" />
+  </Graphics>
+</Fragment>
+<!-- U/5OnwRUrqdNuouttkSHuCna27sCsUdD7fA23GiwqfI/MLNHt6Eb5nW7RBvs+EVFBCFWp5UJtJMEPhQRTJGVjQ== -->

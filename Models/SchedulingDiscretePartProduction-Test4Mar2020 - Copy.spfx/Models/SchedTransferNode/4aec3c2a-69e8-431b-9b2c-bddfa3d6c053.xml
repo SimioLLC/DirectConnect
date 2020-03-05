@@ -1,0 +1,92 @@
+<Fragment>
+  <Compatibility ParseElementFunctionsInExpressionsLast="True" ParseNonEntityAssociatedObjectForPropertyReference="False" AllowInteractiveEntryOfNonStandardElementNames="False" />
+  <Lists />
+  <PropertyDefinitions>
+    <Categories>
+      <Category Name="Crossing Logic" Description="Crossing Logic" />
+      <Category Name="Routing Logic" Description="Routing Logic" />
+      <Category Name="Routing Logic/Other Routing Out Options" Description="Routing Logic/Other Routing Out Options" InitiallyExpanded="False" />
+      <Category Name="Transport Logic" Description="Transport Logic" />
+      <Category Name="Transport Logic/Transporter Status On Drop-Off" Description="Transporter Status Options On Entity Drop-Off" />
+      <Category Name="State Assignments" Description="Optional State Assignments" InitiallyExpanded="False" />
+      <Category Name="Tally Statistics" Description="Optional Tally Statistics" InitiallyExpanded="False" />
+      <Category Name="Add-On Process Triggers" Description="Add-On Process Triggers" InitiallyExpanded="False" />
+      <Category Name="Financials" Description="Financials" InitiallyExpanded="False" />
+      <Category Name="Advanced Options" Description="Advanced Options" InitiallyExpanded="False" />
+    </Categories>
+    <Overrides>
+      <Override Name="ReportStatistics" DefaultValue="False" />
+      <Override Name="InitialCost" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="InitialCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceIdleCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="ResourceCostPerUse" DefaultValue="0.0" DefaultUnitSubType="21059" />
+      <Override Name="ResourceUsageCostRate" DefaultValue="0.0" DefaultUnitSubType="1380122624" />
+      <Override Name="LogResourceUsage" DefaultValue="False" />
+      <Override Name="IncludeInPlanResourceConstraints" DefaultValue="True" />
+      <Override Name="CapacityType" DefaultValue="Fixed" />
+      <Override Name="WorkDayExceptions" DefaultValue="0 Rows" />
+      <Override Name="WorkPeriodExceptions" DefaultValue="0 Rows" />
+      <Override Name="InitialCapacity" DefaultValue="1" />
+      <Override Name="RankingRule" DefaultValue="First In First Out" />
+      <Override Name="RankingExpression" DefaultValue="0.0" />
+      <Override Name="DynamicSelectionRule" DefaultValue="None" />
+      <Override Name="TransferInConstraintsType" DefaultValue="Default" />
+      <Override Name="TransferOutConstraintsType" DefaultValue="Default" />
+      <Override Name="ExpectedSetupTimeExpression" DefaultValue="0.0" DefaultUnitSubType="0" />
+      <Override Name="ExpectedOperationTimeExpression" DefaultValue="0.0" DefaultUnitSubType="0" />
+      <Override Name="InitialTravelerCapacity" DefaultValue="Infinity" />
+      <Override Name="EntryRankingRule" DefaultValue="First In First Out" />
+      <Override Name="EntryRankingExpression" DefaultValue="Entity.Priority" />
+      <Override Name="EntryExemptionCondition" DefaultValue="TransferNode.RideOnTransporter &amp;&amp; !Entity.Is.Transporter" />
+      <Override Name="OutputFlowControlMode" DefaultValue="Single Flow (No Splitting)" />
+      <Override Name="FlowSplitAllocationRule" DefaultValue="Evenly If Possible" />
+      <Override Name="OutboundTravelMode" DefaultValue="Continue" />
+      <Override Name="OutboundLinkPreference" DefaultValue="Any" />
+      <Override Name="OutboundLinkRule" DefaultValue="Shortest Path" />
+      <Override Name="OutboundLinkRandomNumberStream" DefaultValue="0" />
+      <Override Name="SequenceExpectedOperationTime" DefaultValue="0.0" DefaultUnitSubType="0" />
+      <Override Name="DestinationType" DefaultValue="Select From List" />
+      <Override Name="DestinationNodeName" DefaultValue="No Destination" />
+      <Override Name="DestinationNodeListName" DefaultValue="RoutingDestinations.Node" />
+      <Override Name="DestinationSelectionGoal" DefaultValue="Preferred Order" />
+      <Override Name="DestinationSelectionExpression" DefaultValue="Candidate.Node.AssociatedStationOverload" />
+      <Override Name="DestinationSelectionCondition" DefaultValue="Math.If( ManufacturingOrders.OrderStatus == List.OrderStatus.WIP &amp;&amp; WorkInProcess.AvailableRowCount &gt; 0 &amp;&amp; WorkInProcess[1].CurrentRouteNumber == Routings.RouteNumber, Candidate.Node.AssociatedObject == WorkInProcess[1].CurrentResource, True)" />
+      <Override Name="BlockedDestinationRule" DefaultValue="Select Available Only" />
+      <Override Name="RoutingOutRequiredMaterials" DefaultValue="BillOfMaterials">
+        <DefaultTuples>
+          <DefaultTuple>
+            <DefaultTupleEntry Name="RequiredMaterialConsumptionType" Value="Material" />
+            <DefaultTupleEntry Name="RequiredMaterialName" Value="BillOfMaterials.ComponentMaterial" />
+            <DefaultTupleEntry Name="RequiredMaterialInventorySiteType" Value="None" />
+            <DefaultTupleEntry Name="RequiredMaterialQuantity" Value="Math.If( ManufacturingOrders.OrderStatus == List.OrderStatus.WIP &amp;&amp; WorkInProcess.AvailableRowCount &gt; 0 &amp;&amp; WorkInProcess[1].CurrentRouteNumber == Routings.RouteNumber, 0.0, Math.If( BillOfMaterials.MaterialUse == Enum.MaterialActionType.Consume,  BillOfMaterials.RequiredQuantity * ManufacturingOrders.Quantity, 0.0))" />
+            <DefaultTupleEntry Name="RequiredMaterialLotID" Value="BillOfMaterials.RequiredLotId" />
+          </DefaultTuple>
+        </DefaultTuples>
+      </Override>
+      <Override Name="RouteRequestRankingRule" DefaultValue="First In First Out" />
+      <Override Name="RouteRequestRankingExpression" DefaultValue="Entity.Priority" />
+      <Override Name="RouteRequestDynamicSelectionRule" DefaultValue="GlobalSelectionRule">
+        <DefaultDynamicPropertyValues>
+          <DefaultDynamicPropertyValue Name="DispatchingRule" Value="DispatchingRule" />
+          <DefaultDynamicPropertyValue Name="TieBreakerRule" Value="TieBreakerRule" />
+        </DefaultDynamicPropertyValues>
+      </Override>
+      <Override Name="RideOnTransporter" DefaultValue="False" />
+      <Override Name="TransporterType" DefaultValue="Specific" />
+      <Override Name="TransporterReservationMethod" DefaultValue="Reserve Closest" />
+      <Override Name="TransporterSelectionGoal" DefaultValue="Preferred Order" />
+      <Override Name="TransporterSelectionExpression" DefaultValue="Candidate.Transporter.RideStationOverload" />
+      <Override Name="AssignmentsOnEntering" DefaultValue="0 Rows" />
+      <Override Name="TalliesOnEntering" DefaultValue="0 Rows" />
+      <Override Name="TalliesOnExited" DefaultValue="0 Rows" />
+    </Overrides>
+  </PropertyDefinitions>
+  <States />
+  <Events />
+  <Elements />
+  <Processes />
+  <Graphics>
+    <AnimationSetup MinimumNumberOfFramesToDisplayIdleAnimation="10" />
+  </Graphics>
+</Fragment>
+<!-- R3yMDoS+gIt6fn4SpMNuTq6zXhcHrIBU2f8TLQHzRMPhYSDLMkx+7aU59o0l3tJlD1veNL1ISYdXfn0KHFE9Fg== -->

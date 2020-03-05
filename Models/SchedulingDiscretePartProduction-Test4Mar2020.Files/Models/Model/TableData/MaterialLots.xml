@@ -1,0 +1,15 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="MaterialName">MaterialX</Property>
+      <Property Name="Quantity">1000</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="MaterialName">MaterialY</Property>
+      <Property Name="Quantity">2000</Property>
+    </Properties>
+  </Row>
+</Fragment>
+<!-- SUV5mMxmLxu613vb+vLZB3xtYbWuwTsiyPBO6R/Cd3x+q3D5dBtmGC0LcDI/tEkDnBYRZtHlXTYDH+UVFu4wsg== -->

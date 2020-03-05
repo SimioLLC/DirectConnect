@@ -4,6 +4,6 @@
     <StartWorkingDirectory>C:\Users\Public\Documents\Simio\Examples\</StartWorkingDirectory>
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files %28x86%29\Simio\Simio64.exe</StartProgram>
-    <StartArguments>-f C:\Users\Public\Documents\Simio\Examples\SchedulingDiscretePartProduction_DC.spfx</StartArguments>
+    <StartArguments>-f e:\%28svn azure%29\SimioCloud\Github\DirectConnect-N1\Models\SchedulingDiscretePartProduction-Test4Mar2020.spfx</StartArguments>
   </PropertyGroup>
 </Project>

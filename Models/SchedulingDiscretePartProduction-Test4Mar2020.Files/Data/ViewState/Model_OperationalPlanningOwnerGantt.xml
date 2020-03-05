@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OperationalPlanningOwnerGantt Model="Model" FileVersion="208" xmlns="http://www.simio.com/projects/v1">
+  <Gantt StartTime="2019-12-02T08:00:03" StopTime="2019-12-03T08:00:03">
+    <Columns>
+      <Column Name="Entity" Width="150" />
+      <Column Name="#" Width="50" />
+      <Column Name="MaterialName" Width="50" />
+    </Columns>
+    <Rows>
+      <Row FullName="|Order14" />
+      <Row FullName="|Order14|Constraints" />
+      <Row FullName="|Order14|Tasks" />
+      <Row FullName="|Order25" />
+      <Row FullName="|Order25|Constraints" />
+      <Row FullName="|Order25|Tasks" />
+      <Row FullName="|Order24" />
+      <Row FullName="|Order24|Constraints" />
+      <Row FullName="|Order24|Tasks" />
+      <Row FullName="|Order23" />
+      <Row FullName="|Order23|Constraints" />
+      <Row FullName="|Order23|Tasks" />
+      <Row FullName="|Order22" />
+      <Row FullName="|Order22|Constraints" />
+      <Row FullName="|Order22|Tasks" />
+      <Row FullName="|Order21" />
+      <Row FullName="|Order21|Constraints" />
+      <Row FullName="|Order21|Tasks" />
+      <Row FullName="|Order20" />
+      <Row FullName="|Order20|Constraints" />
+      <Row FullName="|Order20|Tasks" />
+      <Row FullName="|Order19" />
+      <Row FullName="|Order19|Constraints" />
+      <Row FullName="|Order19|Tasks" />
+      <Row FullName="|Order18" />
+      <Row FullName="|Order18|Constraints" />
+      <Row FullName="|Order18|Tasks" />
+      <Row FullName="|Order17" />
+      <Row FullName="|Order17|Constraints" />
+      <Row FullName="|Order17|Tasks" />
+      <Row FullName="|Order16" />
+      <Row FullName="|Order16|Constraints" />
+      <Row FullName="|Order16|Tasks" />
+      <Row FullName="|Order15" />
+      <Row FullName="|Order15|Constraints" />
+      <Row FullName="|Order15|Tasks" />
+      <Row FullName="|Order27" />
+      <Row FullName="|Order27|Constraints" />
+      <Row FullName="|Order27|Tasks" />
+      <Row FullName="|Order13" />
+      <Row FullName="|Order13|Constraints" />
+      <Row FullName="|Order13|Tasks" />
+      <Row FullName="|Order12" />
+      <Row FullName="|Order12|Constraints" />
+      <Row FullName="|Order12|Tasks" />
+      <Row FullName="|Order11" />
+      <Row FullName="|Order11|Constraints" />
+      <Row FullName="|Order11|Tasks" />
+      <Row FullName="|Order10" />
+      <Row FullName="|Order10|Constraints" />
+      <Row FullName="|Order10|Tasks" />
+      <Row FullName="|Order09" />
+      <Row FullName="|Order09|Constraints" />
+      <Row FullName="|Order09|Tasks" />
+      <Row FullName="|Order08" />
+      <Row FullName="|Order08|Constraints" />
+      <Row FullName="|Order08|Tasks" />
+      <Row FullName="|Order07" />
+      <Row FullName="|Order07|Constraints" />
+      <Row FullName="|Order07|Tasks" />
+      <Row FullName="|Order06" />
+      <Row FullName="|Order06|Constraints" />
+      <Row FullName="|Order06|Tasks" />
+      <Row FullName="|Order02" />
+      <Row FullName="|Order02|Constraints" />
+      <Row FullName="|Order02|Tasks" />
+      <Row FullName="|Order26" />
+      <Row FullName="|Order26|Constraints" />
+      <Row FullName="|Order26|Tasks" />
+      <Row FullName="|FinishedGoodA" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodA|Order01" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodA|Order01|20" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodA|Order01|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodA|Order01|Tasks" Height="14" />
+      <Row FullName="|FinishedGoodA|Order01|Tasks|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodA|Order01|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|FinishedGoodB" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodB|Order04" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodB|Order04|10" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodB|Order04|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodB|Order04|Tasks" Height="14" />
+      <Row FullName="|FinishedGoodB|Order04|Tasks|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodB|Order04|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|FinishedGoodB|Order03" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodB|Order03|20" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodB|Order03|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodB|Order03|Tasks" Height="14" />
+      <Row FullName="|FinishedGoodB|Order03|Tasks|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodB|Order03|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|FinishedGoodC" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodC|Order05" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodC|Order05|10" Height="14" Expanded="True" />
+      <Row FullName="|FinishedGoodC|Order05|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodC|Order05|Tasks" Height="14" />
+      <Row FullName="|FinishedGoodC|Order05|Tasks|Constraints" Height="14" />
+      <Row FullName="|FinishedGoodC|Order05|Tasks|Resource Usage" Height="14" />
+    </Rows>
+  </Gantt>
+</OperationalPlanningOwnerGantt>

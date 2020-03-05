@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OperationalPlanningResourceGantt Model="Model" FileVersion="208" xmlns="http://www.simio.com/projects/v1">
+  <Gantt StartTime="2019-12-01T08:00:00" StopTime="2019-12-02T08:00:00">
+    <Columns>
+      <Column Name="Resource" Width="162" />
+    </Columns>
+    <Rows>
+      <Row FullName="|Cut" Height="14" Expanded="True" />
+      <Row FullName="|Cut|Cut1" Height="14" />
+      <Row FullName="|Cut|Cut1|Capacity" Height="14" />
+      <Row FullName="|Cut|Cut1|Constrained Entities" Height="14" />
+      <Row FullName="|Cut|Cut1|Day Exceptions" Height="14" />
+      <Row FullName="|Cut|Cut1|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Cut|Cut1|Resource State" Height="14" />
+      <Row FullName="|Cut|Cut1|Tasks" Height="14" />
+      <Row FullName="|Cut|Cut1|Tasks|Constraints" Height="14" />
+      <Row FullName="|Cut|Cut1|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Cut|Cut2" Height="14" />
+      <Row FullName="|Cut|Cut2|Capacity" Height="14" />
+      <Row FullName="|Cut|Cut2|Constrained Entities" Height="14" />
+      <Row FullName="|Cut|Cut2|Day Exceptions" Height="14" />
+      <Row FullName="|Cut|Cut2|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Cut|Cut2|Resource State" Height="14" />
+      <Row FullName="|Cut|Cut2|Tasks" Height="14" />
+      <Row FullName="|Cut|Cut2|Tasks|Constraints" Height="14" />
+      <Row FullName="|Cut|Cut2|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Finish" Height="14" Expanded="True" />
+      <Row FullName="|Finish|Finish1" Height="14" />
+      <Row FullName="|Finish|Finish1|Capacity" Height="14" />
+      <Row FullName="|Finish|Finish1|Constrained Entities" Height="14" />
+      <Row FullName="|Finish|Finish1|Day Exceptions" Height="14" />
+      <Row FullName="|Finish|Finish1|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Finish|Finish1|Resource State" Height="14" />
+      <Row FullName="|Finish|Finish1|Tasks" Height="14" />
+      <Row FullName="|Finish|Finish1|Tasks|Constraints" Height="14" />
+      <Row FullName="|Finish|Finish1|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Finish|Finish2" Height="14" />
+      <Row FullName="|Finish|Finish2|Capacity" Height="14" />
+      <Row FullName="|Finish|Finish2|Constrained Entities" Height="14" />
+      <Row FullName="|Finish|Finish2|Day Exceptions" Height="14" />
+      <Row FullName="|Finish|Finish2|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Finish|Finish2|Resource State" Height="14" />
+      <Row FullName="|Finish|Finish2|Tasks" Height="14" />
+      <Row FullName="|Finish|Finish2|Tasks|Constraints" Height="14" />
+      <Row FullName="|Finish|Finish2|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Materials" Height="14" Expanded="True" />
+      <Row FullName="|Materials|Finished Goods" Height="14" Expanded="True" />
+      <Row FullName="|Materials|Finished Goods|FinishedGoodA" Height="14" />
+      <Row FullName="|Materials|Finished Goods|FinishedGoodB" Height="14" />
+      <Row FullName="|Materials|Finished Goods|FinishedGoodC" Height="14" />
+      <Row FullName="|Materials|Raw Materials" Height="14" Expanded="True" />
+      <Row FullName="|Materials|Raw Materials|MaterialX" Height="14" />
+      <Row FullName="|Materials|Raw Materials|MaterialY" Height="14" />
+      <Row FullName="|Shape" Height="14" Expanded="True" />
+      <Row FullName="|Shape|Shape1" Height="14" />
+      <Row FullName="|Shape|Shape1|Capacity" Height="14" />
+      <Row FullName="|Shape|Shape1|Constrained Entities" Height="14" />
+      <Row FullName="|Shape|Shape1|Day Exceptions" Height="14" />
+      <Row FullName="|Shape|Shape1|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Shape|Shape1|Resource State" Height="14" />
+      <Row FullName="|Shape|Shape1|Tasks" Height="14" />
+      <Row FullName="|Shape|Shape1|Tasks|Constraints" Height="14" />
+      <Row FullName="|Shape|Shape1|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Shape|Shape2" Height="14" />
+      <Row FullName="|Shape|Shape2|Capacity" Height="14" />
+      <Row FullName="|Shape|Shape2|Constrained Entities" Height="14" />
+      <Row FullName="|Shape|Shape2|Day Exceptions" Height="14" />
+      <Row FullName="|Shape|Shape2|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Shape|Shape2|Resource State" Height="14" />
+      <Row FullName="|Shape|Shape2|Tasks" Height="14" />
+      <Row FullName="|Shape|Shape2|Tasks|Constraints" Height="14" />
+      <Row FullName="|Shape|Shape2|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Weld" Height="14" Expanded="True" />
+      <Row FullName="|Weld|Weld1" Height="14" />
+      <Row FullName="|Weld|Weld1|Capacity" Height="14" />
+      <Row FullName="|Weld|Weld1|Constrained Entities" Height="14" />
+      <Row FullName="|Weld|Weld1|Day Exceptions" Height="14" />
+      <Row FullName="|Weld|Weld1|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Weld|Weld1|Resource State" Height="14" />
+      <Row FullName="|Weld|Weld1|Tasks" Height="14" />
+      <Row FullName="|Weld|Weld1|Tasks|Constraints" Height="14" />
+      <Row FullName="|Weld|Weld1|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Weld|Weld2" Height="14" />
+      <Row FullName="|Weld|Weld2|Capacity" Height="14" />
+      <Row FullName="|Weld|Weld2|Constrained Entities" Height="14" />
+      <Row FullName="|Weld|Weld2|Day Exceptions" Height="14" />
+      <Row FullName="|Weld|Weld2|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Weld|Weld2|Resource State" Height="14" />
+      <Row FullName="|Weld|Weld2|Tasks" Height="14" />
+      <Row FullName="|Weld|Weld2|Tasks|Constraints" Height="14" />
+      <Row FullName="|Weld|Weld2|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Workers" Height="14" Expanded="True" />
+      <Row FullName="|Workers|Worker1" Height="14" />
+      <Row FullName="|Workers|Worker1|Constrained Entities" Height="14" />
+      <Row FullName="|Workers|Worker1|Day Exceptions" Height="14" />
+      <Row FullName="|Workers|Worker1|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Workers|Worker1|Population Members" Height="14" />
+      <Row FullName="|Workers|Worker1|Population Members|Worker1[1]" Height="14" />
+      <Row FullName="|Workers|Worker1|Population Members|Worker1[1]|Capacity" Height="14" />
+      <Row FullName="|Workers|Worker1|Population Members|Worker1[1]|Riders" Height="14" />
+      <Row FullName="|Workers|Worker1|Resource State" Height="14" />
+      <Row FullName="|Workers|Worker1|Riders" Height="14" />
+      <Row FullName="|Workers|Worker1|Tasks" Height="14" />
+      <Row FullName="|Workers|Worker1|Tasks|Constraints" Height="14" />
+      <Row FullName="|Workers|Worker1|Tasks|Resource Usage" Height="14" />
+      <Row FullName="|Workers|Worker2" Height="14" />
+      <Row FullName="|Workers|Worker2|Constrained Entities" Height="14" />
+      <Row FullName="|Workers|Worker2|Day Exceptions" Height="14" />
+      <Row FullName="|Workers|Worker2|Downtimes &amp; Other Exceptions" Height="14" />
+      <Row FullName="|Workers|Worker2|Population Members" Height="14" />
+      <Row FullName="|Workers|Worker2|Population Members|Worker2[1]" Height="14" />
+      <Row FullName="|Workers|Worker2|Population Members|Worker2[1]|Capacity" Height="14" />
+      <Row FullName="|Workers|Worker2|Population Members|Worker2[1]|Riders" Height="14" />
+      <Row FullName="|Workers|Worker2|Resource State" Height="14" />
+      <Row FullName="|Workers|Worker2|Riders" Height="14" />
+      <Row FullName="|Workers|Worker2|Tasks" Height="14" />
+      <Row FullName="|Workers|Worker2|Tasks|Constraints" Height="14" />
+      <Row FullName="|Workers|Worker2|Tasks|Resource Usage" Height="14" />
+    </Rows>
+  </Gantt>
+</OperationalPlanningResourceGantt>

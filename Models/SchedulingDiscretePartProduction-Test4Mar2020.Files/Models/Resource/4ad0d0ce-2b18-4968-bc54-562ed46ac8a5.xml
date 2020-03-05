@@ -1,0 +1,692 @@
+<Fragment>
+  <Compatibility ParseElementFunctionsInExpressionsLast="True" ParseNonEntityAssociatedObjectForPropertyReference="False" AllowInteractiveEntryOfNonStandardElementNames="False" />
+  <ChangeDescriptions>
+    <ChangeDescription Version="39">Version 2.37: Changed 'Capacity' property display name to 'Initial Capacity' as object capacities are now user assignable.</ChangeDescription>
+    <ChangeDescription Version="40">Version 2.39: Updated the Resource object process logic to specify all of the object's process delays as non-interruptible.</ChangeDescription>
+    <ChangeDescription Version="53">Version 2.40: Corrected some minor step label typos. Changed 'Evaluating Allocation' property display name to 'Evaluating Seize Request'. Added 'FailedBusy' and 'OffShiftBusy' state values to the object's ResourceState state variable. 'On Shift' or 'Off Shift' add-on process triggers are now called when initializing the object even if a work schedule is not specified. Restructured the failure-related process logic. In the object process logic, the 'Action' property for all Execute steps executing an 'add-on process' is now specified as 'WaitUntilCompleted'.</ChangeDescription>
+    <ChangeDescription Version="54">Version 2.41: Added customized resource utilization calculation for the object using its 'ResourceState' list state.</ChangeDescription>
+    <ChangeDescription Version="55">Version 3.42: Changes related to setting the 'Token Associated Object Destroyed Action' option for process logic in this object.</ChangeDescription>
+    <ChangeDescription Version="56">Version 3.47: Added new 'Appearance' property category.</ChangeDescription>
+    <ChangeDescription Version="57">Version 3.52: If the model's 'Disable Randomness' option is being used, the object's 'Reliability Logic' is now automatically disabled to not generate any failure occurrences.</ChangeDescription>
+    <ChangeDescription Version="60">Version 3.54: Usage of 'Run.RandomnessDisabled' function instead of deprecated 'DisableRandomness' function. Conversion to 'OnRunInitialized' standard interface process. Added 'Run Ending' add-on process trigger.</ChangeDescription>
+    <ChangeDescription Version="61">Version 3.56: Conversion to 'OnEvaluatingSeizeRequest' standard interface process.</ChangeDescription>
+    <ChangeDescription Version="63">Version 4.58: Added new 'Advanced Options' property category.</ChangeDescription>
+    <ChangeDescription Version="65">Version 4.61: Added new 'Financials' property category.</ChangeDescription>
+    <ChangeDescription Version="67">Version 4.63: Reordered the position of the 'Financials' property category. Added new 'Financials-&gt;Resource Costs' property category.</ChangeDescription>
+    <ChangeDescription Version="71">Version 4.65: 'Repairing' add-on process trigger marked as obsolete and is no longer displayed in the Properties window if not previously defined.</ChangeDescription>
+    <ChangeDescription Version="72">Version 4.66: Miscellaneous process logic changes to take advantage of object reference functions as well as the 'Math.If' function syntax.</ChangeDescription>
+    <ChangeDescription Version="75">Version 4.68: Renamed 'InitializedAddOnProcess' property to 'RunInitializedAddOnProcess'. Renamed 'EvaluatingAllocationAddOnProcess' property to 'EvaluatingSeizeRequestAddOnProcess'. Renamed 'Process Logic' property category to 'Resource Logic'.</ChangeDescription>
+    <ChangeDescription Version="76">Version 4.71: Renamed 'EventName' property to 'FailureEventName'.</ChangeDescription>
+    <ChangeDescription Version="77">Version 5.85: Fixed typo in 'Initial Capacity' property description.</ChangeDescription>
+    <ChangeDescription Version="78">Version 5.87: Process logic now uses new property 'HasValue' function instead of deprecated 'IsDefined'.</ChangeDescription>
+    <ChangeDescription Version="79">Version 5.91: Added information to indicate which properties to display if the new 'Show Commonly Used Properties Only' option is enabled.</ChangeDescription>
+    <ChangeDescription Version="81">Version 5.95: Updates to the 'OnFailed', 'OnRepaired', 'OnEvaluatingSeizeRequest', and 'OnCapacityChanged' process logic.</ChangeDescription>
+    <ChangeDescription Version="82">Version 6.103: Some property description updates.</ChangeDescription>
+    <ChangeDescription Version="83">Version 7.123: 'Allocate' process moved to 'Obsolete Processes' category.</ChangeDescription>
+    <ChangeDescription Version="84">Version 7.130: Added 'Advanced Options -&gt; Obsolete Properties' property category.</ChangeDescription>
+    <ChangeDescription Version="85">Version 8.135: Hide the inherited 'ExpectedSetupTimeExpression' and 'ExpectedOperationTimeExpression' properties.</ChangeDescription>
+    <ChangeDescription Version="87">Version 8.136: Simplification of 'OnRunInitialized' process logic.</ChangeDescription>
+    <ChangeDescription Version="88">Version 8.137: Simplification of 'OnFailed' process logic to use fewer Suspend &amp; Resume steps.</ChangeDescription>
+    <ChangeDescription Version="89">Version 8.141: Some process logic modifications to be identical to other fixed resource objects in the Standard Library.</ChangeDescription>
+    <ChangeDescription Version="90">Version 8.142: Added 'Repaired' event and failure-related timers now use that event as their reset triggering event.</ChangeDescription>
+    <ChangeDescription Version="91">Version 9.149: Added 'Failed' event &amp; changed scope of 'Repaired' event from private to public.</ChangeDescription>
+    <ChangeDescription Version="94">Version 9.154: Failure-related timers now reset by a 'FailuresTimerReset' event (fired after Repair step in 'FailureOccurrenceLogic') instead of by the 'Repaired' event.</ChangeDescription>
+    <ChangeDescription Version="96">Version 9.162: Updates to the resource's ResourceState assignments to support use of the new 'Off Shift Rule' option for secondary resources in the Standard and Flow libraries.</ChangeDescription>
+  </ChangeDescriptions>
+  <ChangeStringReplacements>
+    <ChangeStringReplacement Version="75" RegularExpressionPattern="(^|[^\w_])(?i:InitializedAddOnProcess)([^\w_]|$)" ReplacementString="$1RunInitializedAddOnProcess$2" />
+    <ChangeStringReplacement Version="75" RegularExpressionPattern="(^|[^\w_])(?i:EvaluatingAllocationAddOnProcess)([^\w_]|$)" ReplacementString="$1EvaluatingSeizeRequestAddOnProcess$2" />
+  </ChangeStringReplacements>
+  <Lists>
+    <StringList Name="ResourceFailureType">
+      <Items>
+        <Item Value="NoFailures" />
+        <Item Value="CalendarTimeBased" />
+        <Item Value="UsageCountBased" />
+        <Item Value="EventCountBased" />
+        <Item Value="UsageTimeBased" />
+      </Items>
+    </StringList>
+    <StringList Name="ResourceStateName">
+      <Items>
+        <Item Value="Idle" />
+        <Item Value="Busy" />
+        <Item Value="Blocked" />
+        <Item Value="Failed" />
+        <Item Value="OffShift" />
+        <Item Value="FailedBusy" />
+        <Item Value="OffShiftBusy" />
+      </Items>
+    </StringList>
+  </Lists>
+  <PropertyDefinitions>
+    <Categories>
+      <Category Name="Resource Logic" Description="Resource Logic" />
+      <Category Name="Reliability Logic" Description="Reliability Logic" InitiallyExpanded="False" />
+      <Category Name="Financials" Description="Financials" InitiallyExpanded="False" />
+      <Category Name="Financials/Resource Costs" Description="Resource Costs" InitiallyExpanded="False" />
+      <Category Name="Add-On Process Triggers" Description="Add-On Process Triggers" InitiallyExpanded="False" />
+      <Category Name="Advanced Options" Description="Advanced Options" InitiallyExpanded="False" />
+      <Category Name="Advanced Options/Deprecated Properties" Description="Advanced Options/Deprecated Properties" InitiallyExpanded="False" />
+    </Categories>
+    <ListProperty Name="FailureType" DisplayName="Failure Type" Description="Specifies whether this object has failures that affect the object's availability, and the method used to trigger the failure occurrences." ComplexityLevel="Advanced" Category="Reliability Logic" DefaultValue="No Failures" NullString="null" List="ResourceFailureType">
+      <Captions>
+        <Caption Value="NoFailures" Display="No Failures" />
+        <Caption Value="CalendarTimeBased" Display="Calendar Time Based" />
+        <Caption Value="UsageCountBased" Display="Usage Count Based" />
+        <Caption Value="EventCountBased" Display="Event Count Based" />
+        <Caption Value="UsageTimeBased" Display="Usage Time Based" />
+      </Captions>
+    </ListProperty>
+    <EventProperty Name="FailureEventName" DisplayName="Event Name" Description="The name of the event whose occurrences determine when the next failure occurs." ComplexityLevel="Advanced" Category="Reliability Logic" NullString="null">
+      <Switch Property="FailureType" Value="EventCountBased" />
+    </EventProperty>
+    <ExpressionProperty Name="CountBetweenFailures" DisplayName="Count Between Failures" Description="The event or usage count between failure occurrences." ComplexityLevel="Advanced" Category="Reliability Logic" DefaultValue="Random.Uniform(100,200)" NullString="null">
+      <Switch Property="FailureType" Value="UsageCountBased, EventCountBased" />
+    </ExpressionProperty>
+    <ExpressionProperty Name="UptimeBetweenFailures" DisplayName="Uptime Between Failures" Description="The uptime between failure occurrences." ComplexityLevel="Advanced" Category="Reliability Logic" DefaultValue="Random.Exponential(100)" NullString="null" UnitType="Time">
+      <Switch Property="FailureType" Value="CalendarTimeBased, UsageTimeBased" />
+    </ExpressionProperty>
+    <ExpressionProperty Name="TimeToRepair" DisplayName="Time To Repair" Description="The time required to repair a failure when one occurs." ComplexityLevel="Advanced" Category="Reliability Logic" DefaultValue="Random.Triangular(0.5,1.0,1.5)" NullString="null" UnitType="Time">
+      <Switch Property="FailureType" Comparison="NotEqual" Value="NoFailures" />
+    </ExpressionProperty>
+    <ElementProperty Name="RunInitializedAddOnProcess" DisplayName="Run Initialized" Description="Occurs when the simulation run is initialized." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="RunEndingAddOnProcess" DisplayName="Run Ending" Description="Occurs when the simulation run is ending." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="AllocatedAddOnProcess" DisplayName="Allocated" Description="Occurs when this Resource object has had capacity allocated to another object." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="ReleasedAddOnProcess" DisplayName="Released" Description="Occurs when this Resource object has had capacity released by another object." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="FailedAddOnProcess" DisplayName="Failed" Description="Occurs when this object has failed." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="RepairedAddOnProcess" DisplayName="Repaired" Description="Occurs when a failure is repaired at this object." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="EvaluatingSeizeRequestAddOnProcess" DisplayName="Evaluating Seize Request" Description="Occurs when this Resource object is evaluating whether to accept or reject a request to seize capacity of the resource. In the executed decision process, assigning a value less than or equal to 0.0 to the executing token's ReturnValue state indicates that the seize request is rejected." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="OnShiftAddOnProcess" DisplayName="On Shift" Description="Occurs when the resource is at the start of a shift because of its specified work schedule." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ElementProperty Name="OffShiftAddOnProcess" DisplayName="Off Shift" Description="Occurs when the resource is at the end of a shift because of its specified work schedule." ComplexityLevel="Advanced" Category="Add-On Process Triggers" Required="False" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <ExpressionProperty Name="CapitalCost" DisplayName="Capital Cost" Description="The initial one-time setup cost to add this object to the system." ComplexityLevel="Advanced" Category="Financials" DefaultValue="0.0" NullString="null" UnitType="Currency" />
+    <ElementProperty Name="RepairingAddOnProcess" DisplayName="Repairing" Description="Occurs when the repair time for a failure at this object is starting.&#xD;&#xA;&#xD;&#xA;NOTE: This property has been deprecated. Use the 'Add-On Process Triggers -&gt; Failed' property instead." ComplexityLevel="Advanced" Category="Advanced Options/Deprecated Properties" Required="False" Deprecated="True" NullString="null" ValueListFilter="UserExecutableProcessesOnly" Type="Process" />
+    <Overrides>
+      <Override Name="InitialCost" Visible="False" />
+      <Override Name="InitialCostRate" Visible="False" />
+      <Override Name="ResourceIdleCostRate" Visible="True" />
+      <Override Name="ResourceCostPerUse" Visible="True" />
+      <Override Name="ResourceUsageCostRate" Visible="True" />
+      <Override Name="LogResourceUsage" Visible="True" />
+      <Override Name="DisplayCategory" Visible="True" />
+      <Override Name="DisplayColor" Visible="True" />
+      <Override Name="IncludeInPlanResourceConstraints" Visible="True" />
+      <Override Name="CapacityType" Visible="True" Category="Resource Logic" />
+      <Override Name="WorkSchedule" Visible="True" Category="Resource Logic" />
+      <Override Name="WorkDayExceptions" Visible="True" />
+      <Override Name="WorkPeriodExceptions" Visible="True" />
+      <Override Name="InitialCapacity" Visible="True" Category="Resource Logic" />
+      <Override Name="RankingRule" Visible="True" Category="Resource Logic" />
+      <Override Name="RankingExpression" Visible="True" />
+      <Override Name="DynamicSelectionRule" Visible="True" Category="Resource Logic" />
+      <Override Name="CurrentSizeIndex" DefaultValue="$(DefinitionName).ResourceState" />
+      <Override Name="TransferInConstraintsType" Visible="False" />
+      <Override Name="TransferInCondition" Visible="False" />
+      <Override Name="TransferOutConstraintsType" Visible="False" />
+      <Override Name="TransferOutCondition" Visible="False" />
+      <Override Name="ExpectedSetupTimeExpression" Visible="False" />
+      <Override Name="ExpectedOperationTimeExpression" Visible="False" />
+    </Overrides>
+    <PropertyReplacements>
+      <PropertyReplacement Version="74" OldPropertyName="InitializedAddOnProcess" NewPropertyName="RunInitializedAddOnProcess" />
+      <PropertyReplacement Version="74" OldPropertyName="EvaluatingAllocationAddOnProcess" NewPropertyName="EvaluatingSeizeRequestAddOnProcess" />
+      <PropertyReplacement Version="76" OldPropertyName="EventName" NewPropertyName="FailureEventName" />
+    </PropertyReplacements>
+  </PropertyDefinitions>
+  <States>
+    <ListState Name="ResourceState" Description="Gets the current resource state of the object.&#xD;&#xA;&#xD;&#xA;Possible Values: Idle = 0, Busy = 1, Failed = 3, OffShift = 4, FailedBusy = 5, OffShiftBusy = 6" List="ResourceStateName" AutomaticAssignment="ResourceAutoStates" ResourceUtilizationCalculation="Custom">
+      <AutoStates>
+        <AutoState Label="FailedBusy" State="Failed AutoState" />
+        <AutoState Label="OffShiftBusy" State="OffShift AutoState" />
+      </AutoStates>
+      <ResourceUtilizationCalculationSettings>
+        <ResourceUtilizationCalculationSetting StateName="Idle" Setting="NotUtilized" />
+        <ResourceUtilizationCalculationSetting StateName="Busy" Setting="Utilized" />
+        <ResourceUtilizationCalculationSetting StateName="Blocked" Setting="NotUtilized" />
+        <ResourceUtilizationCalculationSetting StateName="Failed" Setting="NotUtilized" />
+        <ResourceUtilizationCalculationSetting StateName="OffShift" Setting="NotUtilized" />
+        <ResourceUtilizationCalculationSetting StateName="FailedBusy" Setting="Utilized" />
+        <ResourceUtilizationCalculationSetting StateName="OffShiftBusy" Setting="Utilized" />
+      </ResourceUtilizationCalculationSettings>
+    </ListState>
+  </States>
+  <Events>
+    <Event Name="Failed" Description="The Failed event provides notification that this resource has failed." />
+    <Event Name="Repaired" Description="The Repaired event provides notification that a failure at this resource has been repaired." />
+    <Event Name="Allocated" Description="The Allocated event provides notification that capacity of this resource has been allocated." />
+    <Event Name="Released" Description="The Released event provides notification that capacity of this resource has been released." />
+    <Event Name="FailuresTimerReset" Description="The FailuresTimerReset event provides notification to reset the built-in failure stream timer(s) of this resource." Public="False" />
+  </Events>
+  <Elements>
+    <Element Type="Failure" Name="Failure" Scope="Public" Description="The failure occurrences for this object.">
+      <Properties>
+        <Property Name="ReportStatistics">False</Property>
+        <Property Name="OnFailedProcess">
+          <Value>OnFailed</Value>
+        </Property>
+        <Property Name="OnRepairedProcess">
+          <Value>OnRepaired</Value>
+        </Property>
+      </Properties>
+    </Element>
+    <Element Type="Timer" Name="CalendarTimeBasedFailures">
+      <Properties>
+        <Property Name="TimeOffset">UptimeBetweenFailures</Property>
+        <Property Name="TimeInterval">UptimeBetweenFailures</Property>
+        <Property Name="MaximumEvents">1</Property>
+        <Property Name="ResetEventName">FailuresTimerReset</Property>
+        <Property Name="InitiallyEnabled">False</Property>
+      </Properties>
+    </Element>
+    <Element Type="Timer" Name="UsageCountBasedFailures">
+      <Properties>
+        <Property Name="IntervalType">EventCount</Property>
+        <Property Name="TriggeringEventName">Released</Property>
+        <Property Name="TriggeringEventCount">CountBetweenFailures</Property>
+        <Property Name="MaximumEvents">1</Property>
+        <Property Name="ResetEventName">FailuresTimerReset</Property>
+        <Property Name="InitiallyEnabled">False</Property>
+      </Properties>
+    </Element>
+    <Element Type="Timer" Name="EventCountBasedFailures">
+      <Properties>
+        <Property Name="IntervalType">EventCount</Property>
+        <Property Name="TriggeringEventName">FailureEventName</Property>
+        <Property Name="TriggeringEventCount">CountBetweenFailures</Property>
+        <Property Name="MaximumEvents">1</Property>
+        <Property Name="ResetEventName">FailuresTimerReset</Property>
+        <Property Name="InitiallyEnabled">False</Property>
+      </Properties>
+    </Element>
+    <Element Type="Timer" Name="UsageTimeBasedFailures">
+      <Properties>
+        <Property Name="IntervalType">TimeInState</Property>
+        <Property Name="TimeOffset">UptimeBetweenFailures</Property>
+        <Property Name="TimeInterval">UptimeBetweenFailures</Property>
+        <Property Name="StateVariableName">
+          <Value>ResourceState</Value>
+        </Property>
+        <Property Name="StateValue">Math.If(ResourceState==List.ResourceStateName.Busy || ResourceState==List.ResourceStateName.OffShiftBusy || ResourceState==List.ResourceStateName.FailedBusy, ResourceState, Math.NaN)</Property>
+        <Property Name="MaximumEvents">1</Property>
+        <Property Name="ResetEventName">FailuresTimerReset</Property>
+        <Property Name="InitiallyEnabled">False</Property>
+      </Properties>
+    </Element>
+    <Element Type="CostCenter" Name="CapitalCosts">
+      <Properties>
+        <Property Name="InitialCost" Units="USD">CapitalCost</Property>
+        <Property Name="InitialCostRate" Units="USD per Hour">0.0</Property>
+        <Property Name="DataSource">[Object]</Property>
+        <Property Name="DataItem">"CapitalCost"</Property>
+      </Properties>
+    </Element>
+  </Elements>
+  <Processes>
+    <Process Name="OnRunInitialized" IsOverride="True" ShowAsUserExecutableProcess="False" InterfaceProcessID="Object.OnRunInitialized" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Assign" Name="ToEnableFailures" ExclusionExpression="FailureType == List.ResourceFailureType.NoFailures" ID="2">
+          <Properties>
+            <Property Name="Assignments">
+              <Rows>
+                <Properties>
+                  <Property Name="AssignmentsStateVariableName">
+                    <Value>CalendarTimeBasedFailures.Enabled</Value>
+                  </Property>
+                  <Property Name="AssignmentsNewValue">Run.RandomnessDisabled==False</Property>
+                  <Property Name="AssignmentsSkipAssignmentCondition">FailureType!=List.ResourceFailureType.CalendarTimeBased</Property>
+                </Properties>
+                <Properties>
+                  <Property Name="AssignmentsStateVariableName">
+                    <Value>UsageCountBasedFailures.Enabled</Value>
+                  </Property>
+                  <Property Name="AssignmentsNewValue">Run.RandomnessDisabled==False</Property>
+                  <Property Name="AssignmentsSkipAssignmentCondition">FailureType!=List.ResourceFailureType.UsageCountBased</Property>
+                </Properties>
+                <Properties>
+                  <Property Name="AssignmentsStateVariableName">
+                    <Value>EventCountBasedFailures.Enabled</Value>
+                  </Property>
+                  <Property Name="AssignmentsNewValue">Run.RandomnessDisabled==False</Property>
+                  <Property Name="AssignmentsSkipAssignmentCondition">FailureType!=List.ResourceFailureType.EventCountBased</Property>
+                </Properties>
+                <Properties>
+                  <Property Name="AssignmentsStateVariableName">
+                    <Value>UsageTimeBasedFailures.Enabled</Value>
+                  </Property>
+                  <Property Name="AssignmentsNewValue">Run.RandomnessDisabled==False</Property>
+                  <Property Name="AssignmentsSkipAssignmentCondition">FailureType!=List.ResourceFailureType.UsageTimeBased</Property>
+                </Properties>
+              </Rows>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="3" />
+        </Step>
+        <Step Type="Subscribe" Name="ToFailureEvents" ExclusionExpression="FailureType == List.ResourceFailureType.NoFailures" ID="3">
+          <Properties>
+            <Property Name="EventName">CalendarTimeBasedFailures.Event</Property>
+            <Property Name="ProcessName">
+              <Value>FailureOccurrenceLogic</Value>
+            </Property>
+            <Property Name="Events">
+              <Rows>
+                <Properties>
+                  <Property Name="EventsEventName">UsageCountBasedFailures.Event</Property>
+                  <Property Name="EventsProcessName">
+                    <Value>FailureOccurrenceLogic</Value>
+                  </Property>
+                </Properties>
+                <Properties>
+                  <Property Name="EventsEventName">EventCountBasedFailures.Event</Property>
+                  <Property Name="EventsProcessName">
+                    <Value>FailureOccurrenceLogic</Value>
+                  </Property>
+                </Properties>
+                <Properties>
+                  <Property Name="EventsEventName">UsageTimeBasedFailures.Event</Property>
+                  <Property Name="EventsProcessName">
+                    <Value>FailureOccurrenceLogic</Value>
+                  </Property>
+                </Properties>
+              </Rows>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="4" />
+        </Step>
+        <Step Type="Execute" Name="RunInitialized_AddOnProcess" ID="4">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>RunInitializedAddOnProcess</Value>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="5" />
+        </Step>
+        <Step Type="Decide" Name="IfOnShift" ExclusionExpression="Math.If(OnShiftAddOnProcess.HasValue, 0, 2)" ID="5">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">ResourceState!=List.ResourceStateName.OffShift</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="8" />
+          <Exit Name="False" Type="Alternate" NextID="6" />
+        </Step>
+        <Step Type="Decide" Name="IfOffShift" ExclusionExpression="Math.If(OffShiftAddOnProcess.HasValue, 0, 2)" ID="6">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">ResourceState==List.ResourceStateName.OffShift</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="7" />
+        </Step>
+        <Step Type="Execute" Name="OffShift_AddOnProcess" ID="7">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>OffShiftAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+        <Step Type="Execute" Name="OnShift_AddOnProcess" ID="8">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>OnShiftAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="OnCapacityAllocated" IsOverride="True" ShowAsUserExecutableProcess="False" InterfaceProcessID="Object.OnCapacityAllocated" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Fire" Name="AllocatedEvent" ID="2">
+          <Properties>
+            <Property Name="EventName">Allocated</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="3" />
+        </Step>
+        <Step Type="Execute" Name="Allocated_AddOnProcess" ID="3">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>AllocatedAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="OnCapacityReleased" IsOverride="True" ShowAsUserExecutableProcess="False" InterfaceProcessID="Object.OnCapacityReleased" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Assign" Name="ResourceState" ID="2">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>ResourceState</Value>
+            </Property>
+            <Property Name="NewValue">Math.If((Capacity==0)&amp;&amp;(ResourceOwners==0), List.ResourceStateName.OffShift, Failure.Active&amp;&amp;(ResourceOwners==0), List.ResourceStateName.Failed, ResourceState)</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="3" />
+        </Step>
+        <Step Type="Fire" Name="ReleasedEvent" ID="3">
+          <Properties>
+            <Property Name="EventName">Released</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="4" />
+        </Step>
+        <Step Type="Execute" Name="Released_AddOnProcess" ID="4">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>ReleasedAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="OnEvaluatingSeizeRequest" IsOverride="True" ShowAsUserExecutableProcess="False" InterfaceProcessID="Object.OnEvaluatingSeizeRequest" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Decide" Name="IfResourceAvailable" ExclusionExpression="FailureType == List.ResourceFailureType.NoFailures" ID="2">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">!Failure.Active &amp;&amp; (UsageCountBasedFailures.EventCount==0) &amp;&amp; (EventCountBasedFailures.EventCount==0) &amp;&amp; (CalendarTimeBasedFailures.EventCount==0) &amp;&amp; (UsageTimeBasedFailures.EventCount==0)</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="4" />
+          <Exit Name="False" Type="Alternate" NextID="3" />
+        </Step>
+        <Step Type="Assign" Name="RejectSeizeRequest" ID="3">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>Token.ReturnValue</Value>
+            </Property>
+            <Property Name="NewValue">False</Property>
+          </Properties>
+        </Step>
+        <Step Type="Execute" Name="EvaluatingSeizeRequest_AddOnProcess" ID="4">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>EvaluatingSeizeRequestAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="OnCapacityChanged" IsOverride="True" ShowAsUserExecutableProcess="False" InterfaceProcessID="Object.OnCapacityChanged" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Decide" Name="IfOnShift" ID="2">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">(Capacity.Previous==0)&amp;&amp;(Capacity&gt;0)</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="6" />
+          <Exit Name="False" Type="Alternate" NextID="3" />
+        </Step>
+        <Step Type="Decide" Name="IfOffShift" ID="3">
+          <Properties>
+            <Property Name="DecideType">ConditionBased</Property>
+            <Property Name="ConditionOrProbability">(Capacity.Previous&gt;0)&amp;&amp;(Capacity==0)</Property>
+          </Properties>
+          <Exit Name="True" Type="Primary" NextID="4" />
+        </Step>
+        <Step Type="Assign" Name="ResourceState" ID="4">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>ResourceState</Value>
+            </Property>
+            <Property Name="NewValue">Math.If((ResourceOwners==0)||ResourceOwners.AllProcessingSuspended, List.ResourceStateName.OffShift, List.ResourceStateName.OffShiftBusy)</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="5" />
+        </Step>
+        <Step Type="Execute" Name="OffShift_AddOnProcess" ID="5">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>OffShiftAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+        <Step Type="Assign" Name="ResourceState" ID="6">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>ResourceState</Value>
+            </Property>
+            <Property Name="NewValue">Math.If(Failure.Active, Math.If(ResourceOwners&gt;0, List.ResourceStateName.FailedBusy, List.ResourceStateName.Failed), ResourceState)</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="7" />
+        </Step>
+        <Step Type="Execute" Name="OnShift_AddOnProcess" ID="7">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>OnShiftAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="OnRunEnding" IsOverride="True" ShowAsUserExecutableProcess="False" InterfaceProcessID="Object.OnRunEnding" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Execute" Name="RunEnding_AddOnProcess" ID="2">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>RunEndingAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="FailureOccurrenceLogic" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Fail" Name="Resource" ID="2">
+          <Properties>
+            <Property Name="FailureName">
+              <Value>Failure</Value>
+            </Property>
+            <Property Name="TokenWaitAction">WaitUntilOnFailedProcessCompleted</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="3" />
+        </Step>
+        <Step Type="Delay" Name="TimeToRepair" ID="3">
+          <Properties>
+            <Property Name="DelayTime">TimeToRepair</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="4" />
+        </Step>
+        <Step Type="Repair" Name="Resource" ID="4">
+          <Properties>
+            <Property Name="FailureName">
+              <Value>Failure</Value>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="5" />
+        </Step>
+        <Step Type="Fire" Name="FailuresTimerResetEvent" ID="5">
+          <Properties>
+            <Property Name="EventName">FailuresTimerReset</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="6" />
+        </Step>
+        <Step Type="Allocate" Name="Resource" ID="6">
+          <Properties>
+            <Property Name="ResourceType">ParentObject</Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="OnFailed" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Assign" Name="ResourceState" ID="2">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>ResourceState</Value>
+            </Property>
+            <Property Name="NewValue">Math.If((Capacity==0)&amp;&amp;((ResourceOwners==0)||ResourceOwners.AllProcessingSuspended), List.ResourceStateName.OffShift, (Capacity==0)&amp;&amp;(ResourceOwners&gt;0), List.ResourceStateName.OffShiftBusy, ResourceOwners&gt;0, List.ResourceStateName.FailedBusy, List.ResourceStateName.Failed)</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="3" />
+        </Step>
+        <Step Type="Assign" Name="OnFailedAssignments" ID="3">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>OnEvaluatingSeizeRequest.Enabled</Value>
+            </Property>
+            <Property Name="NewValue">False</Property>
+            <Property Name="Assignments">
+              <Rows>
+                <Properties>
+                  <Property Name="AssignmentsStateVariableName">
+                    <Value>OnEvaluatingSeizeRequest.ReturnValue</Value>
+                  </Property>
+                  <Property Name="AssignmentsNewValue">False</Property>
+                </Properties>
+              </Rows>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="4" />
+        </Step>
+        <Step Type="Fire" Name="FailedEvent" ID="4">
+          <Properties>
+            <Property Name="EventName">Failed</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="5" />
+        </Step>
+        <Step Type="Execute" Name="Failed_AddOnProcess" ID="5">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>FailedAddOnProcess</Value>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="6" />
+        </Step>
+        <Step Type="Execute" Name="Repairing_AddOnProcess" ID="6">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>RepairingAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="OnRepaired" BeginStepID="2">
+      <Properties />
+      <Steps>
+        <Step Type="Assign" Name="OnRepairedAssignments" ID="2">
+          <Properties>
+            <Property Name="StateVariableName">
+              <Value>OnEvaluatingSeizeRequest.Enabled</Value>
+            </Property>
+            <Property Name="NewValue">True</Property>
+            <Property Name="Assignments">
+              <Rows>
+                <Properties>
+                  <Property Name="AssignmentsStateVariableName">
+                    <Value>OnEvaluatingSeizeRequest.ReturnValue</Value>
+                  </Property>
+                  <Property Name="AssignmentsNewValue">True</Property>
+                </Properties>
+              </Rows>
+            </Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="3" />
+        </Step>
+        <Step Type="Fire" Name="RepairedEvent" ID="3">
+          <Properties>
+            <Property Name="EventName">Repaired</Property>
+          </Properties>
+          <Exit Name="Exit" Type="Primary" NextID="4" />
+        </Step>
+        <Step Type="Execute" Name="Repaired_AddOnProcess" ID="4">
+          <Properties>
+            <Property Name="ProcessName">
+              <Value>RepairedAddOnProcess</Value>
+            </Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+    <Process Name="Allocate" BeginStepID="2" Category="Deprecated Processes">
+      <Properties />
+      <Steps>
+        <Step Type="Allocate" Name="Resource" ID="2">
+          <Properties>
+            <Property Name="ResourceType">ParentObject</Property>
+          </Properties>
+        </Step>
+      </Steps>
+    </Process>
+  </Processes>
+  <External>
+    <Graphics>
+      <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+        <SymbolRef Id="ff9df4e7-c487-4531-a221-8116b525c759" />
+      </SymbolInstance>
+      <DefaultAdditionalSymbols>
+        <DefaultAdditionalSymbol Index="0">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="1">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="3aaebbf4-884d-4258-96a4-164dfedabe55" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="2">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="57128ca7-5e7e-4e39-b3ed-78199c50a286" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="3">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="1a9b1e32-fd48-49a7-8949-9ce4291d9513" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="4">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="32d5d577-b2bc-42b8-9926-a18b0b26941b" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="5">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="346360a9-b9da-4386-9f4b-fea842d64972" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+        <DefaultAdditionalSymbol Index="6">
+          <SymbolInstance Center="0 0 0" ExternallyVisible="True">
+            <SymbolRef Id="[UseExternalSymbol]" />
+            <Decorations>
+              <Decoration SurfacePath="0,0" SurfaceId="0">
+                <MaterialRef Id="bd03adb1-cbf9-4c18-abbc-66f76d266796" />
+              </Decoration>
+            </Decorations>
+          </SymbolInstance>
+        </DefaultAdditionalSymbol>
+      </DefaultAdditionalSymbols>
+      <OffsetDynamicRelativeToExternalBounds Value="False" />
+    </Graphics>
+  </External>
+  <Graphics>
+    <AnimationSetup MinimumNumberOfFramesToDisplayIdleAnimation="10" />
+  </Graphics>
+</Fragment>
+<!-- qfuWOZDY3dFIiB4M8GramHKBpShERszZlJ1AQzTgHkXSqlMOdfSfNkLF7Zx9K01PLZU1XYM+I5c33vBsGBEOQA== -->

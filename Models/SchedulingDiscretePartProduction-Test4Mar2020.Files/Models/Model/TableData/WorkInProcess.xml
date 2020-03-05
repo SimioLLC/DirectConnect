@@ -1,0 +1,40 @@
+<Fragment>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order01</Property>
+      <Property Name="CurrentRouteNumber">20</Property>
+      <Property Name="CurrentResource">Weld1</Property>
+      <Property Name="FractionOfSetupCompleted">1.0</Property>
+      <Property Name="CompletedQuantity">5</Property>
+      <Property Name="AccruedCost" Units="USD">970</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order03</Property>
+      <Property Name="CurrentRouteNumber">20</Property>
+      <Property Name="CurrentResource">Weld2</Property>
+      <Property Name="FractionOfSetupCompleted">1.0</Property>
+      <Property Name="CompletedQuantity">3</Property>
+      <Property Name="AccruedCost" Units="USD">1020</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order04</Property>
+      <Property Name="CurrentResource">Cut1</Property>
+      <Property Name="FractionOfSetupCompleted">1.0</Property>
+      <Property Name="CompletedQuantity">2</Property>
+      <Property Name="AccruedCost" Units="USD">1050</Property>
+    </Properties>
+  </Row>
+  <Row>
+    <Properties>
+      <Property Name="OrderId">Order05</Property>
+      <Property Name="CurrentResource">Cut2</Property>
+      <Property Name="FractionOfSetupCompleted">0.5</Property>
+      <Property Name="AccruedCost" Units="USD">1130</Property>
+    </Properties>
+  </Row>
+</Fragment>
+<!-- xO2k6ADRVESpb275Swkik/NwsIIPaLgfF+IDDzgpWA9Zi6jZD5ewlryRrOM7b2b85tVcfEzthcOl3ZIB13iWxw== -->
