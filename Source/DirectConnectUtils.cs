@@ -32,7 +32,7 @@ namespace DirectConnect
         private static string _dateTimeFormatString = string.Empty;
         private static string _diagnosticLogsPath = string.Empty;
 
-        public const double MaxSqlFloat =  1.0E+308; // (SQL 8 byte) designed to be memorable
+        public const double MaxSqlFloat = 1.0E+308; // (SQL 8 byte) designed to be memorable
         public const double MinSqlFloat = -MaxSqlFloat; // designed to be memorable
 
         ////public const double MaxSqlReal = 1.0E+38; // designed to be memorable
@@ -97,13 +97,25 @@ namespace DirectConnect
         /// </summary>
         public static void SetConnection(string connectionString)
         {
-            if (_connection == null)
+            string marker = "Begin.";
+            try
             {
-                _connection = new SqlConnection(connectionString);
+                if (_connection == null)
+                {
+                    marker = "New SqlConnection";
+                    _connection = new SqlConnection(connectionString);
+                }
+
+                if (_connection.State == ConnectionState.Closed)
+                {
+                    marker = "Re-Opening";
+                    _connection.Open();
+                }
+
             }
-            if (_connection.State == ConnectionState.Closed)
+            catch (Exception ex)
             {
-                _connection.Open();
+                throw new ApplicationException($"Cannot Connect. Marker={marker}. ConnectString={connectionString}. Err={ex.Message}");
             }
         }
 
@@ -480,7 +492,7 @@ namespace DirectConnect
                     {
                         var dataFormat = logExpression.DataFormat; // Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
                         Type columnType;
-                        switch ( dataFormat )
+                        switch (dataFormat)
                         {
                             case ExpressionDataFormat.Real:
                                 {
@@ -618,7 +630,7 @@ namespace DirectConnect
         /// </summary>
         /// <param name="fieldValue"></param>
         /// <returns></returns>
-        private static object FixValueForDatabase( object fieldValue )
+        private static object FixValueForDatabase(object fieldValue)
         {
             try
             {
@@ -644,11 +656,11 @@ namespace DirectConnect
                         case TypeCode.Single:
                             if (Single.IsNaN((Single)fieldValue))
                                 fieldValue = DBNull.Value;
-                            else if ( Single.IsPositiveInfinity((Single)fieldValue))
+                            else if (Single.IsPositiveInfinity((Single)fieldValue))
                             {
                                 fieldValue = MaxSqlFloat;
                             }
-                            else if ( Single.IsNegativeInfinity((Single)fieldValue))
+                            else if (Single.IsNegativeInfinity((Single)fieldValue))
                             {
                                 fieldValue = MinSqlFloat;
                             }
@@ -1031,7 +1043,7 @@ namespace DirectConnect
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Table={tableName} Action={actionInt} Marker={marker} Err={ex}");
+                throw new ApplicationException($"Table={tableName} Action={actionInt} Marker={marker} Err={ex.Message}");
             }
 
         }
@@ -1199,8 +1211,8 @@ namespace DirectConnect
         /// <param name="count"></param>
         /// <param name="exceptionMessage"></param>
         /// <returns></returns>
-        public static Int32 MergeData(SqlCommand cmd, DataTable dt, ITable table, 
-            string tableName, ITable exportExcludeForUpdate, Int32 actionInt, Int32 count, 
+        public static Int32 MergeData(SqlCommand cmd, DataTable dt, ITable table,
+            string tableName, ITable exportExcludeForUpdate, Int32 actionInt, Int32 count,
             out string exceptionMessage)
         {
             bool firstColumn = true;
@@ -1239,7 +1251,7 @@ namespace DirectConnect
                                 var excludeUpate = exportExcludeForUpdate
                                     .Rows.OfType<IRow>()
                                     .Where(r => r.Properties["TableName"].Value
-                                    .Trim().ToLowerInvariant() == table.Name.Trim().ToLowerInvariant() 
+                                    .Trim().ToLowerInvariant() == table.Name.Trim().ToLowerInvariant()
                                         && r.Properties["ColumnName"].Value.Trim().ToLowerInvariant() == col.Name.Trim().ToLowerInvariant())
                                     .ToList();
 
@@ -1283,7 +1295,7 @@ namespace DirectConnect
                             //  not excluded
                             var excludeUpate = exportExcludeForUpdate
                                 .Rows.OfType<IRow>()
-                                .Where(r => r.Properties["TableName"].Value.Trim().ToLowerInvariant() == table.Name.Trim().ToLowerInvariant() 
+                                .Where(r => r.Properties["TableName"].Value.Trim().ToLowerInvariant() == table.Name.Trim().ToLowerInvariant()
                                     && r.Properties["ColumnName"].Value.Trim().ToLowerInvariant() == stateCol.Name.Trim().ToLowerInvariant())
                                 .ToList();
 
@@ -1544,7 +1556,10 @@ namespace DirectConnect
                     arrayIdx++;
                     if (simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue != null)
                         thisRow.Add(GetFormattedStringValue(simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].PlanValue.ToString(), stateColDataTypes[arrayIdx]));
-                    else thisRow.Add(GetFormattedStringValue("", stateColDataTypes[arrayIdx]));
+                    else if (simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].InteractiveValue != null)
+                        thisRow.Add(GetFormattedStringValue(simioTable.StateRows[rowNumber - 1].StateValues[array.ToString()].InteractiveValue.ToString(), stateColDataTypes[arrayIdx]));
+                    else
+                        thisRow.Add(GetFormattedStringValue("", stateColDataTypes[arrayIdx]));
                 }
                 tableList.Add(thisRow.ToArray());
             }
@@ -1661,108 +1676,130 @@ namespace DirectConnect
         private static string GetFormattedStringValue(String valueString, String dataType)
         {
 
-
-            switch (dataType)
+            try
             {
-                case "int":
-                    {
-                        if (valueString.Length > 0)
+
+                switch (dataType.ToLower())
+                {
+                    case "int":
                         {
-                            if (Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out long intProp))
+                            if (valueString.Length > 0)
                             {
-                                valueString = intProp.ToString(_cultureInfo);
+                                if (Int64.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out long intProp))
+                                {
+                                    valueString = intProp.ToString(_cultureInfo);
+                                }
+                                else
+                                    valueString = null;
                             }
                             else
                                 valueString = null;
                         }
-                        else
-                            valueString = null;
-                    }
-                    break;
+                        break;
 
-                case "real":
-                case "float":
-                    {
-                        if (valueString.Length > 0)
+                    case "real":
+                    case "float":
                         {
-                            switch ( valueString.ToLower())
+                            if (valueString.Length > 0)
                             {
-                                case "\u221E":  // Unicode infinity character
-                                case "infinity":
-                                    {
-                                        valueString = MaxSqlFloat.ToString();
-                                    }
-                                    break;
+                                switch (valueString.ToLower())
+                                {
+                                    case "\u221E":  // Unicode infinity character
+                                    case "infinity":
+                                        {
+                                            valueString = MaxSqlFloat.ToString();
+                                        }
+                                        break;
 
-                                case "-\u221E": // Unicode infinity character
-                                case "-infinity": 
-                                    {
-                                        valueString = (MinSqlFloat).ToString();
-                                    }
-                                    break;
+                                    case "-\u221E": // Unicode infinity character
+                                    case "-infinity":
+                                        {
+                                            valueString = (MinSqlFloat).ToString();
+                                        }
+                                        break;
 
-                                case "nan":
+                                    case "nan":
+                                        {
+                                            valueString = null;
+                                        }
+                                        break;
+
+                                    default:
+                                        {
+                                            if (Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleProp))
+                                            {
+                                                valueString = doubleProp.ToString(_cultureInfo);
+                                            }
+                                            else
+                                                valueString = null;
+                                        }
+                                        break;
+                                }
+                            }
+                            else
+                                valueString = null;
+                        }
+                        break;
+
+                    case "datetime":
+                        {
+                            if (valueString.Length > 0)
+                            {
+                                if (DateTime.TryParse(valueString, out DateTime dateProp))
+                                {
+                                    valueString = dateProp.ToString(_cultureInfo);
+                                    if (dateProp.Year < 1753 || dateProp.Year > 9999) // SQL range
                                     {
                                         valueString = null;
                                     }
-                                    break;
-
-                                default:
-                                    {
-                                        if (Double.TryParse(valueString, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleProp))
-                                        {
-                                            valueString = doubleProp.ToString(_cultureInfo);
-                                        }
-                                        else
-                                            valueString = null;
-                                    }
-                                    break;
-                            }
-                        }
-                        else
-                            valueString = null;
-                    }
-                    break;
-
-                case "datetime":
-                    {
-                        if (valueString.Length > 0)
-                        {
-                            if (DateTime.TryParse(valueString, out DateTime dateProp))
-                            {
-                                valueString = dateProp.ToString(_cultureInfo);
-                                if (dateProp.Year < 1753 || dateProp.Year > 9999) // SQL range
-                                {
+                                }
+                                else
                                     valueString = null;
-                        }
+
                             }
                             else
                                 valueString = null;
-
                         }
-                        else
-                            valueString = null;
-                    }
-                    break;
-                case "bit":
-                    {
-                        if (valueString.Length > 0)
+                        break;
+
+                    case "bit":
                         {
-                            if (Boolean.TryParse(valueString, out bool boolProp))
+                            if (valueString.Length > 0)
                             {
-                                valueString = boolProp.ToString(_cultureInfo);
+                                if (Boolean.TryParse(valueString, out bool boolProp))
+                                {
+                                    valueString = boolProp.ToString(_cultureInfo);
+                                }
+                                else
+                                    valueString = null;
                             }
                             else
                                 valueString = null;
                         }
-                        else
-                            valueString = null;
-                    }
-                    break;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        {
+                            if (dataType.StartsWith("nvarchar"))
+                            {
+                                //Todo: Extract the length and truncate if necessary
+                                
+                            }
+                            else
+                            {
+                                throw new ApplicationException($"Cannot Format. Unknown DataType={dataType}");
+                            }
+                        }
+                        break;
+
+                } // switch
             }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException($"Cannot Format. DataType={dataType} Value={valueString}");
+            }
+
             return valueString;
 
         }
